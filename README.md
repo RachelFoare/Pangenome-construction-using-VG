@@ -79,11 +79,22 @@ With several VCF files, either merge them into one file using SAMtools or run yo
 vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf-file2.vcf.gz >x.vg
 ```
 
-Before trying this method on the actual HPC, I did a trial run with a chromosome 21 VCF and a reference sequence.
+Then, you can get the reference, the VCF and the index. 
+```sh
+# get the reference
+wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
+# and the 1000G VCF
+wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.wgs.phase3_shapeit2_mvncall_integrated_v5b.20130502.sites.vcf.gz
+# and its index
+wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.wgs.phase3_shapeit2_mvncall_integrated_v5b.20130502.sites.vcf.gz.tbi
+# unpack the reference
+gunzip hs37d5.fa.gz
+```
 
-The reference file is availiable here [https://www.ncbi.nlm.nih.gov/refseq/] or here [https://ftp.ensembl.org/pub/release-109/fasta/homo_sapiens/dna/]
 
-The VCF files are available here [http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000_genomes_project/release/]
+
+
+
 
 With these references, run the following :
 ```sh
