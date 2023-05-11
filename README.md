@@ -46,11 +46,6 @@ org.label-schema.usage.singularity.deffile.from: quay.io/vgteam/vg:v1.48.0
 org.label-schema.usage.singularity.version: 3.8.6
 ```
 
-Now vg can be launched :
-```sh
-vg help 
-```
-
 However, it is necessary to bind the singularity container with the VCF files. 
 By default Singularity bind mounts ```/home/$USER```
 Assume the files are in the directory ```data``` :
@@ -58,5 +53,13 @@ Assume the files are in the directory ```data``` :
 singularity shell --bind data:/mnt image.sif
 ```
 If needed, it is possible to run several instances of the image at the same time, see https://docs.sylabs.io/guides/3.0/user-guide/running_services.html
+
+
+Now vg can be launched :
+```sh
+vg help 
+```
+
+
 
 
