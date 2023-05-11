@@ -61,7 +61,8 @@ Now vg can be launched :
 vg help 
 ```
 Note that to build a graph, an index of the VCF file is required. The VCF index file can be generated using the tabix command provided by SAMtools : ``` tabix -p vcf x.vcf.gz``` 
-To start constructing a graph, still in the ```data``` directory, with your ```reference.fa``` file in FASTA and ```your-vcf-file.vcf.gz```, the following will construct a graph in ```x.vg``` :
+
+To start building a graph, still in the ```data``` directory, with your ```reference.fa``` file in FASTA and ```your-vcf-file.vcf.gz```, the following will construct a graph in ```x.vg``` :
 
 ```sh
 vg construct -r small/reference.fa -v small/your-vcf-file.vcf.gz >x.vg
