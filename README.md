@@ -7,7 +7,7 @@ The goal is to understand how singularity and vg work, in order to build a Pange
 
 
 This step requires conda.
-Installing singularity :
+To install singularity, use the following :
 ```sh
 conda install -c conda-forge singularity 
 ```
