@@ -11,7 +11,7 @@ To install singularity, use the following :
 ```sh
 conda install -c conda-forge singularity 
 ```
-Install SAMTools (Sequence Alignment/Map (SAM)) via conda :
+Install SAMTools (Sequence Alignment/Map) via conda :
 
 ```sh
 conda install -c bioconda samtools
@@ -63,10 +63,12 @@ Note that to build a graph, an index of the VCF file is required. The VCF index 
 To start constructing a graph, still in the ```data``` directory, with your ```reference.fa``` file in FASTA and ```your-vcf-file.vcf.gz```, the following will construct a graph in ```x.vg``` :
 
 ```sh
-vg construct -r data/reference.fa -v data/your-vcf-file.vcf.gz >x.vg
+vg construct -r small/reference.fa -v small/your-vcf-file.vcf.gz >x.vg
 ```
 With several VCF files, either merge them into one file (see in Merging VCFs) or run your command with the following syntax :
 
 ```sh
-vg construct -r data/reference.fa -v data/your-vcf-file.vcf.gz >x.vg
+vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf-file2.vcf.gz >x.vg
 ```
+The reference file is availiable here https://www.ncbi.nlm.nih.gov/refseq/
+The VCF files are available here https://ftp.ensembl.org/pub/release-109/variation/vcf/homo_sapiens/
