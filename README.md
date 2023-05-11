@@ -11,6 +11,12 @@ To install singularity, use the following :
 ```sh
 conda install -c conda-forge singularity 
 ```
+Install SAMTools via conda :
+
+```sh
+conda install -c bioconda samtools
+```
+
 Creating the environment ```pang``` in conda :
 ```sh
 conda create pang
