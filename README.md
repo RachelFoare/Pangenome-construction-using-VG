@@ -68,10 +68,10 @@ The VCF index file can be generated using the tabix command provided by SAMtools
 The FASTA .gz file needs to be converted to a .bgz before indexing, like so : ```zcat reference.fna.gz | bgzip -c > reference.fna.bgz```
 And then indexed :  ```samtools faidx  reference.fna.bgz```
 
-To start building a graph, still in the ```data``` directory, with your ```reference.fa``` file in FASTA and ```your-vcf-file.vcf.gz```, the following will construct a graph in ```x.vg``` :
+To start building a graph, still in the ```data``` directory, with your ```reference.fna.bgz``` file in FASTA and ```your-vcf-file.vcf.gz```, the following will construct a graph in ```x.vg``` :
 
 ```sh
-vg construct -r small/reference.fa -v small/your-vcf-file.vcf.gz >x.vg
+vg construct -r small/reference.fna.bgz -v small/your-vcf-file.vcf.gz >x.vg
 ```
 With several VCF files, either merge them into one file using SAMtools or run your command with the following syntax :
 
