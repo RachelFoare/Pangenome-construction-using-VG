@@ -42,3 +42,6 @@ Assume the files are in the directory ```data``` :
 ```sh
 singularity shell --bind data:/mnt image.sif
 ```
+If needed, it is possible to run several instances of the image at the same time, see https://docs.sylabs.io/guides/3.0/user-guide/running_services.html
+
+
