@@ -16,6 +16,7 @@ Install SAMTools via conda :
 ```sh
 conda install -c bioconda samtools
 ```
+SAMTools will be used later to edit the VCF files to make subgroups with 0.1% minor allele frequency or above.
 
 Creating an environment, here ```pang```, in conda :
 ```sh
