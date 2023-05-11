@@ -60,6 +60,10 @@ Now vg can be launched :
 vg help 
 ```
 
+To start constructing a graph, still in the ```data``` directory, with your ```reference.fa``` file in FASTA and ```your-vcf-file.vcf.gz```, the following will construct a graph in ```x.vg``` :
 
+```sh
+vg construct -r data/reference.fa -v data/your-vcf-file.vcf.gz >x.vg
+```
 
 
