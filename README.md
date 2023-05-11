@@ -30,7 +30,22 @@ singularity help build
 singularity build image.sif docker://quay.io/vgteam/vg:v1.48.0   
 singularity shell image.sif
 ```
-Here, the image ```quay.io/vgteam/vg:v1.48.0``` is the one used to be able to launch vg
+Here, the image ```quay.io/vgteam/vg:v1.48.0``` is the one used to be able to launch vg.
+
+Let's check if it worked properly :
+```sh
+singularity inspect image.sif
+```
+It should return something like the following :
+```sh
+org.label-schema.build-arch: amd64
+org.label-schema.build-date: Thursday_11_May_2023_10:16:5_ACST
+org.label-schema.schema-version: 1.0
+org.label-schema.usage.singularity.deffile.bootstrap: docker
+org.label-schema.usage.singularity.deffile.from: quay.io/vgteam/vg:v1.48.0
+org.label-schema.usage.singularity.version: 3.8.6
+```
+
 Now vg can be launched :
 ```sh
 vg help 
