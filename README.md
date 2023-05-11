@@ -28,7 +28,7 @@ vg help
 ```
 
 it is necessary to bind the singularity container with the VCF files. 
-assume the files are in the directory ```sh data```.
+assume the files are in the directory ```data```.
 ```sh
 singularity shell --bind data:/mnt image.sif
 ```
