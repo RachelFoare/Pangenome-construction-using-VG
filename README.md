@@ -1,34 +1,35 @@
 # Pangenome-construction-using-VG
 Steps to the creation of a pangenome in VG using Singularity -- CSIRO INTERNSHIP 2023
 
-#Installing and Using Singularity
+# Installing and Using Singularity
 
 
 This step requires conda.
-installing singularity :
+Installing singularity :
 ```sh
 conda install -c conda-forge singularity 
 ```
-creating an environment in conda :
+Creating an environment in conda :
 ```sh
 conda create pang
 conda activate pang
 ```
-building an image in singularity :
+Building an image in singularity from an image in the docker library :
 ```sh
 singularity help build
 // this is to see the different options to create the image
 singularity build image.sif docker://quay.io/vgteam/vg:v1.48.0   
-//this is the image used to launch vg
 singularity shell image.sif
 ```
-now vg can be launched :
+Here, the image ```quay.io/vgteam/vg:v1.48.0``` is the one used to be able to launch vg
+Now vg can be launched :
 ```sh
 vg help 
 ```
 
-it is necessary to bind the singularity container with the VCF files. 
-assume the files are in the directory ```data```.
+However, it is necessary to bind the singularity container with the VCF files. 
+
+Assume the files are in the directory ```data``` :
 ```sh
 singularity shell --bind data:/mnt image.sif
 ```
