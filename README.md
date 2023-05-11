@@ -17,7 +17,7 @@ Install SAMTools via conda :
 conda install -c bioconda samtools
 ```
 
-Creating the environment ```pang``` in conda :
+Creating an environment, here ```pang```, in conda :
 ```sh
 conda create pang
 conda activate pang
