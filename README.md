@@ -75,3 +75,8 @@ vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf
 The reference file is availiable here https://www.ncbi.nlm.nih.gov/refseq/
 
 The VCF files are available here https://ftp.ensembl.org/pub/release-109/variation/vcf/homo_sapiens/
+
+With these references, run the following :
+```sh
+vg construct -r data/GRCh38_latest_genomic.fna.gz -v data/homo_sapiens-chr21.vcf.gz
+```
