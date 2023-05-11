@@ -22,7 +22,13 @@ singularity build image.sif docker://quay.io/vgteam/vg:v1.48.0
 //this is the image used to launch vg
 singularity shell image.sif
 ```
-now vg can be lanuched :
+now vg can be launched :
 ```sh
 vg help 
+```
+
+it is necessary to bind the singularity container with the VCF files. 
+assume the files are in the directory ```sh data```.
+```sh
+singularity shell --bind data:/mnt image.sif
 ```
