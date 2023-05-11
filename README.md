@@ -11,7 +11,7 @@ Installing singularity :
 ```sh
 conda install -c conda-forge singularity 
 ```
-Creating an environment in conda :
+Creating the environment ```pang``` in conda :
 ```sh
 conda create pang
 conda activate pang
