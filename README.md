@@ -81,7 +81,7 @@ vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf
 
 Before trying this method on the actual HPC, I did a trial run with a chromosome 21 VCF and a reference sequence.
 
-The reference file is availiable here https://www.ncbi.nlm.nih.gov/refseq/
+The reference file is availiable here [https://www.ncbi.nlm.nih.gov/refseq/]   (https://ftp.ensembl.org/pub/release-109/fasta/homo_sapiens/dna/)
 
 The VCF files are available here https://ftp.ensembl.org/pub/release-109/variation/vcf/homo_sapiens/
 
@@ -93,3 +93,5 @@ singularity shell --bind data:/mnt image.sif
 vg construct -r data/GRCh38_latest_genomic.fna.bgz -v data/homo_sapiens-chr21.vcf.gz
 ```
 However, it seems there is a mismatch in the contig names, therefore this error should return : ```[vg::Constructor] Error: Reference contig "21" in VCF not found in FASTA.``` 
+
+If so, match the contigs by adding options -n vcf_contig=fasta_contig (e.g. -n chr1=1 -n chr2=2) to the vg construct command.
