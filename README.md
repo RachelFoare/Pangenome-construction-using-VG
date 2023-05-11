@@ -37,7 +37,7 @@ vg help
 ```
 
 However, it is necessary to bind the singularity container with the VCF files. 
-
+By default Singularity bind mounts ```/home/$USER```
 Assume the files are in the directory ```data``` :
 ```sh
 singularity shell --bind data:/mnt image.sif
