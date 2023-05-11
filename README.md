@@ -72,4 +72,5 @@ With several VCF files, either merge them into one file (see in Merging VCFs) or
 vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf-file2.vcf.gz >x.vg
 ```
 The reference file is availiable here https://www.ncbi.nlm.nih.gov/refseq/
+
 The VCF files are available here https://ftp.ensembl.org/pub/release-109/variation/vcf/homo_sapiens/
