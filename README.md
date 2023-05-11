@@ -2,6 +2,8 @@
 Steps to the creation of a pangenome in VG using Singularity -- CSIRO INTERNSHIP 2023
 
 #Installing and Using Singularity
+
+
 This step requires conda.
 installing singularity :
 ```sh
