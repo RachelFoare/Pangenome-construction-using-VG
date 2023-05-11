@@ -72,7 +72,7 @@ To start building a graph, still in the ```data``` directory, with your ```refer
 ```sh
 vg construct -r small/reference.fa -v small/your-vcf-file.vcf.gz >x.vg
 ```
-With several VCF files, either merge them into one file (see in Merging VCFs) or run your command with the following syntax :
+With several VCF files, either merge them into one file using SAMtools or run your command with the following syntax :
 
 ```sh
 vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf-file2.vcf.gz >x.vg
