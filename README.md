@@ -83,8 +83,8 @@ Then, you can get the reference, the VCF and the index.
 ```sh
 # get the reference
 wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
-# get the HGDP vcfs
-wget 
+# get the HGDP vcfs by changing the command with the correct files found here : file://wsl.localhost/Ubuntu/home/rachel/data/index.html
+ wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz
 # unpack the reference
 gunzip hs37d5.fa.gz
 ```
