@@ -108,3 +108,15 @@ However, it seems there is a mismatch in the contig names, therefore this error 
 
 If so, match the contigs by adding options -n vcf_contig=fasta_contig (e.g. -n chr1=1 -n chr2=2) to the vg construct command.
 Due to formatting differences, these files could'nt be compared to build a graph
+
+
+
+# Creating Subsets for the target population
+The goal now is to filter the VCF files by keeping the individuals from the target population only. This can be done with bcftools, a SAMtools project.
+
+
+
+
+
+
+
