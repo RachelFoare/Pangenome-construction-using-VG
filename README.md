@@ -71,7 +71,7 @@ And then indexed :  ```samtools faidx  reference.fna.bgz```
 To start building a graph, still in the ```data``` directory, with your ```reference.fna.bgz``` file in FASTA and ```your-vcf-file.vcf.gz```, the following will construct a graph in ```x.vg``` :
 
 ```sh
-vg construct -r small/reference.fna.bgz -v small/your-vcf-file.vcf.gz >x.vg
+vg construct -r data/reference.fna.bgz -v data/your-vcf-file.vcf.gz >x.vg
 ```
 With several VCF files, either merge them into one file using SAMtools or run your command with the following syntax :
 
@@ -82,11 +82,9 @@ vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf
 Then, you can get the reference, the VCF and the index. 
 ```sh
 # get the reference
-wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
+wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
 # get the HGDP vcfs by changing the command with the correct files found here depending on the requested chromosome : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
  wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz
-# unpack the reference
-gunzip hs37d5.fa.gz
 ```
 
 
@@ -101,6 +99,23 @@ bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP012
 ```
 
 The reference for the population IDs can be found here : https://www.internationalgenome.org/data-portal/population/MozabiteHGDP
+
+# Pangenome trial run
+Now that you have everything you need, let's try and build a pangenome graph using chromosome 21 for the Mozambite population. 
+Let's start by indexing the reference and the vcf files :
+```sh
+# index the ref file
+samtools faidx GRCh38_full_analysis_set_plus_decoy_hla.fa
+
+# zip and index the vcf 
+bgzip -c data/moza21.vcf.gz > data/moza21.vcf.gz                                                                                                                                                                   
+tabix -p vcf data/moza21.vcf.gz 
+
+# run singularity
+singularity shell --bind data:/mnt image.sif
+vg construct -r data/GRCh38_full_analysis_set_plus_decoy_hla.fa -v data/moza21.vcf.gz
+# error: no VCF header
+```
 
 
 
