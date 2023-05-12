@@ -98,7 +98,7 @@ cd data
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  hgdp_21.vcf.gz > gzip > moza21.vcf.gz
 ```
 
-The reference for the population IDs can be found here : https://www.internationalgenome.org/data-portal/population/MozabiteHGDP
+The reference for the population IDs can be found here : https://www.internationalgenome.org/data-portal/population/MozabiteHGDP 
 
 # Pangenome trial run
 Now that you have everything you need, let's try and build a pangenome graph using chromosome 21 for the Mozambite population. 
