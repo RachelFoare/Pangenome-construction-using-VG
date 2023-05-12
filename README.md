@@ -83,7 +83,7 @@ Then, you can get the reference, the VCF and the index.
 ```sh
 # get the reference
 wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
-# get the HGDP vcfs by changing the command with the correct files found here : file://wsl.localhost/Ubuntu/home/rachel/data/index.html
+# get the HGDP vcfs by changing the command with the correct files found here : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
  wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz
 # unpack the reference
 gunzip hs37d5.fa.gz
@@ -93,15 +93,16 @@ gunzip hs37d5.fa.gz
 
 
 
+Now let's do a trial run for a pangenome, using the VCF file of one chromosome only.
 
 With these references, run the following :
 ```sh
 cd data
 samtools faidx GRCh38_latest_genomic.fna.bgz
-tabix -p vcf homo_sapiens-chr21.vcf.gz
+tabix -p vcf hgdp_wgs.20190516.full.chr21.vcf.gz
 cd
 singularity shell --bind data:/mnt image.sif
-vg construct -r data/GRCh38_latest_genomic.fna.bgz -v data/homo_sapiens-chr21.vcf.gz
+vg construct -r data/GRCh38_full_analysis_set_plus_decoy_hla.fna.bgz -v data/hgdp_wgs.20190516.full.chr21.vcf.gz
 ```
 However, it seems there is a mismatch in the contig names, therefore this error should return : ```[vg::Constructor] Error: Reference contig "21" in VCF not found in FASTA.``` 
 
