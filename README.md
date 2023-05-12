@@ -83,10 +83,8 @@ Then, you can get the reference, the VCF and the index.
 ```sh
 # get the reference
 wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
-# and the 1000G VCF
-wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.wgs.phase3_shapeit2_mvncall_integrated_v5b.20130502.sites.vcf.gz
-# and its index
-wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/ALL.wgs.phase3_shapeit2_mvncall_integrated_v5b.20130502.sites.vcf.gz.tbi
+# get the HGDP vcfs
+wget 
 # unpack the reference
 gunzip hs37d5.fa.gz
 ```
