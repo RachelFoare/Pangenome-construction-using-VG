@@ -2,7 +2,7 @@
 Steps to the creation of a pangenome in VG using Singularity -- CSIRO INTERNSHIP 2023
 
 The goal is to understand how singularity and vg work, in order to build a Pangenome.
-In Somalis, this is the 3rd highest cause of death per year (4.57% as per 2020 WHO statistics). What's more, when it comes to genetic studies, Somalis (and East Africa in general) is severely understudied. In fact there is not one single paper with East African whole genomes. Because the Somalis have unique indigenous ancestral components that are distinct from the rest of Africa, let alone the rest of the world (https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004393#pgen.1004393-Pagani1), most whole genomes for which data is available (including Southern and Western Africa) will not be reliable for constructing a pangenome. In fact the Fst values between many of these Northern, Southern and Western Africans is as high (in some cases higher) than what you see between Europeans and Asians.
+In Somalis, this is the 3rd highest cause of death per year (4.57% as per 2020 WHO statistics). What's more, when it comes to genetic studies, Somalis (and East Africa in general) is severely understudied. In fact there is not one single paper with East African whole genomes. [Because the Somalis have unique indigenous ancestral components that are distinct from the rest of Africa, let alone the rest of the world](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1004393#pgen.1004393-Pagani1), most whole genomes for which data is available (including Southern and Western Africa) will not be reliable for constructing a pangenome. In fact the Fst values between many of these Northern, Southern and Western Africans is as high (in some cases higher) than what you see between Europeans and Asians.
 The only exception is of course, the North African Mozabites, who have the smallest Fst and highest ancestry contributions to Somali populations amongst all source populations outside of East Africa (22% on average, the best fitting model according to qpAdm), likely due to shared drift and past admixture events. The Bedouin act as a good control (as they have the lowest Fst, ~0.01 and the most ancestral affinity to the Mozabite), to evaluate the performance of the Pangenome that will be constructed. The pangenome will be constructed with autosomal chromosomes only.
 
 
@@ -56,7 +56,7 @@ Assume the files are in the directory ```data``` :
 singularity shell --bind data:/mnt image.sif
 ```
 This will open a temporary sandbox, that you can ```exit``` at anytime.
-If needed, it is possible to run several instances of the image at the same time, see https://docs.sylabs.io/guides/3.0/user-guide/running_services.html
+If needed, it is possible to run several instances of the image at the same time, see [here](https://docs.sylabs.io/guides/3.0/user-guide/running_services.html).
 
 
 Now vg can be launched :
@@ -149,10 +149,9 @@ Changing the HPC resource configs :
 #SBATCH --account=OD-012345
 ```
 
-# Creating a Pangenome on the HPC
+
 Let's start with writting a complete .sh file that the HPC will be able to run.
 
-It can be useful to use 2 jobscripts, since all the vcfs need to run in the same singularity container. Let's write a script that will write another script containing the commands needed to run vg in singularity.
 Open a note pad, e.g. ```micro```.
 In the notepad, specify the resources needed for the job (i.e. job name, wall time, nodes, number of tasks, cpu, RAM, etc).
 
@@ -183,6 +182,14 @@ And run it :
 ```sh
 sbatch helloworld-advanced_script.sh
 ``` 
+
+
+
+# Creating a Pangenome on the HPC
+
+
+
+It can be useful to use 2 jobscripts, since all the vcfs need to run in the same singularity container. It is possible to write a script that will write another script containing the commands needed to run vg in singularity. Otherwise, a simple loop can do the trick. See both ways [here](https://github.com/RachelFoare/Pangenome-construction-using-VG/blob/main/Running%20the%20pangenome%20on%20the%20HPC)
 Let's download all the VCF files, the reference file and the container image in a new directory called ```data``` :
 
 ```sh
