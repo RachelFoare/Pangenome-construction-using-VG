@@ -91,17 +91,23 @@ wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_refer
 # Creating Subsets for the target population
 The goal now is to filter the VCF files by keeping the individuals from the target population only. This can be done with bcftools, a SAMtools project.
 
+There are 2 criterion to make these subsets : the population and the Minor Allele Frequency (MAF). 
+The targets are Mozambite individuals and MAF > 0.01% 
 First, let's try it out on a single vcf file, here chromosome 21.
 Here is the command line to exclusively keep the Mozambite population and put it in a new and compressed vcf file :
 ```sh
 cd data
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  hgdp_21.vcf.gz > gzip > moza21.vcf.gz
 ```
+When creating this subset with this population, one individual is apparently not in the VCF file but was listed in HGDP documentation 
+```sh
+Warn: subset called for sample that does not exist in header: "HGDP01273"... skipping
+```
 
 The reference for the population IDs can be found here : https://www.internationalgenome.org/data-portal/population/MozabiteHGDP 
 
 # Pangenome trial run
-Now that you have everything you need, let's try and build a pangenome graph using chromosome 21 for the Mozambite population. 
+Let's try and build a pangenome graph using chromosome 21 for the Mozambite population. 
 Let's start by indexing the reference and the vcf files :
 ```sh
 # index the ref file
