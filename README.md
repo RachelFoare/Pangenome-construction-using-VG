@@ -211,7 +211,7 @@ wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz
 ```
 
-And now with our actual commands to create the graph, considering all the VCFs and the reference files are in ```data``` and have not been indexed yet :
+And now with our actual commands to create the graph, considering all the VCFs and the reference files are in ```data```, the subgroups are not formed and the files have not been indexed yet :
 ```sh
 #!/bin/bash
 #SBATCH --job-name=myjob
@@ -222,6 +222,12 @@ And now with our actual commands to create the graph, considering all the VCFs a
 #SBATCH --time=48:00:00
 #SBATCH --mem=128G
 #SBATCH --partition=your_partition_name
+
+#go to the correct directory
+
+transform
+
+#index all the files
 
 # Load the Singularity module
 module load singularity
