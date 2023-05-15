@@ -92,7 +92,8 @@ wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_refer
 The goal now is to filter the VCF files by keeping the individuals from the target population only. This can be done with bcftools, a SAMtools project.
 
 There are 2 criterion to make these subsets : the population and the Minor Allele Frequency (MAF). 
-The targets are Mozambite individuals and MAF > 0.01% 
+The targets are Mozambite individuals and MAF > 0.01%.
+
 First, let's try it out on a single vcf file, here chromosome 21.
 Here is the command line to exclusively keep the Mozambite population and put it in a new and compressed vcf file :
 ```sh
