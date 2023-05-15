@@ -31,10 +31,35 @@ wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr20.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chrx.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chry.vcf.gz
 
 
 
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr1.vcf.gz > bgzip > sub-chr1.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr2.vcf.gz > bgzip > sub-chr2.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr3.vcf.gz > bgzip > sub-chr3.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr4.vcf.gz > bgzip > sub-chr4.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr5.vcf.gz > bgzip > sub-chr5.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr6.vcf.gz > bgzip > sub-chr6.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr7.vcf.gz > bgzip > sub-chr7.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr8.vcf.gz > bgzip > sub-chr8.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr9.vcf.gz > bgzip > sub-chr9.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr10.vcf.gz > bgzip > sub-chr10.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr11.vcf.gz > bgzip > sub-chr11.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr12.vcf.gz > bgzip > sub-chr12.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr13.vcf.gz > bgzip > sub-chr13.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr14.vcf.gz > bgzip > sub-chr14.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr15.vcf.gz > bgzip > sub-chr15.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr16.vcf.gz > bgzip > sub-chr16.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr17.vcf.gz > bgzip > sub-chr17.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr18.vcf.gz > bgzip > sub-chr18.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr19.vcf.gz > bgzip > sub-chr19.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr20.vcf.gz > bgzip > sub-chr20.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr21.vcf.gz > bgzip > sub-chr21.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr22.vcf.gz > bgzip > sub-chr22.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chrx.vcf.gz > bgzip > sub-chrx.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chry.vcf.gz > bgzip > sub-chry.vcf.gz
 
 
 
@@ -43,34 +68,59 @@ bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP012
 # using a 2nd script
 
 #!/bin/bash
-#SBATCH --job-name=myjob
-#SBATCH --output=myjob_output.log
+#SBATCH --job-name=panjob
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=48:00:00
+#SBATCH --time=7-00
 #SBATCH --mem=128G
-#SBATCH --partition=your_partition_name
+#SBATCH --partition=partition-pangenome
 
 # go to the correct directory
 cd
 
 # index all the files
-
-# load singularity
-module load singularity
+samtools faidx data/GRCh38_full_analysis_set_plus_decoy_hla.fa
+tabix -p vcf data/sub-chr1.vcf.gz
+tabix -p vcf data/sub-chr2.vcf.gz
+tabix -p vcf data/sub-chr3.vcf.gz
+tabix -p vcf data/sub-chr4.vcf.gz
+tabix -p vcf data/sub-chr5.vcf.gz
+tabix -p vcf data/sub-chr6.vcf.gz
+tabix -p vcf data/sub-chr7.vcf.gz
+tabix -p vcf data/sub-chr8.vcf.gz
+tabix -p vcf data/sub-chr9.vcf.gz
+tabix -p vcf data/sub-chr10.vcf.gz
+tabix -p vcf data/sub-chr11.vcf.gz
+tabix -p vcf data/sub-chr12.vcf.gz
+tabix -p vcf data/sub-chr13.vcf.gz
+tabix -p vcf data/sub-chr14.vcf.gz
+tabix -p vcf data/sub-chr15.vcf.gz
+tabix -p vcf data/sub-chr16.vcf.gz
+tabix -p vcf data/sub-chr17.vcf.gz
+tabix -p vcf data/sub-chr18.vcf.gz
+tabix -p vcf data/sub-chr19.vcf.gz
+tabix -p vcf data/sub-chr20.vcf.gz
+tabix -p vcf data/sub-chr21.vcf.gz
+tabix -p vcf data/sub-chr22.vcf.gz
+tabix -p vcf data/sub-chrx.vcf.gz
+tabix -p vcf data/sub-chry.vcf.gz
 
 # create a script file with the commands to run in the same singularity container
 cat > sing-commands.sh <<EOF
 #!/bin/bash
+vg construct -r data/ref.fa -v data/sub-chr1.vcf.gz -v data/sub-chr2.vcf.gz -v data/sub-chr3.vcf.gz -v data/sub-chr4.vcf.gz -v data/sub-chr5.vcf.gz -v data/sub-chr6.vcf.gz -v data/sub-chr7.vcf.gz -v data/sub-chr8.vcf.gz -v data/sub-chr9.vcf.gz -v data/sub-chr10.vcf.gz -v data/sub-chr11.vcf.gz -v data/sub-chr12.vcf.gz -v data/sub-chr13.vcf.gz -v data/sub-chr14.vcf.gz -v data/sub-chr15.vcf.gz -v data/sub-chr16.vcf.gz -v data/sub-chr17.vcf.gz -v data/sub-chr18.vcf.gz -v data/sub-chr19.vcf.gz -v data/sub-chr20.vcf.gz -v data/sub-chr21.vcf.gz -v data/sub-chr22.vcf.gz -v data/sub-chrx.vcf.gz -v data/sub-chry.vcf.gz
 EOF
 chmod +x sing-commands.sh
+
+# load singularity
+module load singularity
 
 # Run the Singularity container with the script file as an argument
 singularity exec data/image.sif bash sing-commands.sh
 
 ########################################################################################################
-# using a function
+# using functions 
 
 #!/bin/bash
 #SBATCH --job-name=myjob
@@ -85,7 +135,33 @@ singularity exec data/image.sif bash sing-commands.sh
 # go to the correct directory
 cd
 
-# index all the files
+# index all the files (this can be done in a function)
+samtools faidx data/GRCh38_full_analysis_set_plus_decoy_hla.fa
+tabix -p vcf data/sub-chr1.vcf.gz
+tabix -p vcf data/sub-chr1.vcf.gz
+tabix -p vcf data/sub-chr2.vcf.gz
+tabix -p vcf data/sub-chr3.vcf.gz
+tabix -p vcf data/sub-chr4.vcf.gz
+tabix -p vcf data/sub-chr5.vcf.gz
+tabix -p vcf data/sub-chr6.vcf.gz
+tabix -p vcf data/sub-chr7.vcf.gz
+tabix -p vcf data/sub-chr8.vcf.gz
+tabix -p vcf data/sub-chr9.vcf.gz
+tabix -p vcf data/sub-chr10.vcf.gz
+tabix -p vcf data/sub-chr11.vcf.gz
+tabix -p vcf data/sub-chr12.vcf.gz
+tabix -p vcf data/sub-chr13.vcf.gz
+tabix -p vcf data/sub-chr14.vcf.gz
+tabix -p vcf data/sub-chr15.vcf.gz
+tabix -p vcf data/sub-chr16.vcf.gz
+tabix -p vcf data/sub-chr17.vcf.gz
+tabix -p vcf data/sub-chr18.vcf.gz
+tabix -p vcf data/sub-chr19.vcf.gz
+tabix -p vcf data/sub-chr20.vcf.gz
+tabix -p vcf data/sub-chr21.vcf.gz
+tabix -p vcf data/sub-chr22.vcf.gz
+tabix -p vcf data/sub-chrx.vcf.gz
+tabix -p vcf data/sub-chry.vcf.gz
 
 # load singularity
 module load singularity
@@ -93,11 +169,12 @@ vg_construct () {
 	chr=$1
 	vcfLIST=$(while read iid; do echo "-v ./"chr${iid}".vcf.gz"; done )
 	singularity run /foa003/data/image.sif \
-	 vg construct -C -S -a -R chr${chr} -r GRCh38_full_analysis_set_plus_decoy_hla.fa \
-	  $vcfLIST \
+	 vg construct -C -S -a -R chr${chr} -r ref.fa \
+	  $vcfLIST \ 
+	  -v data/sub-chrx.vcf.gz -v data/sub-chry.vcf.gz \ 
 	  -t 1 -m 32 > ./sub-chr${chr}.vcf.gz
 }
-chmod +x sing-commands.sh
+chmod +x script.sh
 
 
 
