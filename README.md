@@ -123,6 +123,10 @@ singularity shell --bind data:/mnt image.sif
 vg construct -r data/GRCh38_full_analysis_set_plus_decoy_hla.fa -v data/moza21.vcf.gz
 ```
 
+![Alt text](http://full/path/to/img.jpg "Population-Specific Pangenome Graph of Chromosome 21 for Mozabite People with MAF>0.01
+")
+
+
 # Using the HPC
 The HPC uses Slurm.
 Here are some basic but helpful commands :
@@ -148,8 +152,10 @@ It can be useful to use 2 jobscripts, since all the vcfs need to run in the same
 Open a note pad, e.g. ```micro```.
 In the notepad, specify the resources needed for the job (i.e. job name, wall time, nodes, number of tasks, cpu, RAM, etc).
 
-Let's do a dummy script called ```helloworld_script.sh``` to test that :
+Let's do a dummy script called ```helloworld_script.sh``` to test that, without specified resources :
 ```sh
+#!/bin/bash
+echo "Hello, world!"
 ```
 
 And run it : 
@@ -159,6 +165,14 @@ sbatch helloworld_script.sh
 
 Printing HelloWorld is quite easy, now let's write a script called ```helloworld-advanced_script.sh```that will create and execute another script :
 ```sh
+#!/bin/bash
+cat > my-2nd-script.sh <<EOF
+#!/bin/bash
+echo "Hello, world!"
+EOF
+
+chmod +x myscript.sh
+./my-2nd-script.sh
 ```
 
 And run it :
