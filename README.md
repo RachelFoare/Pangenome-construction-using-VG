@@ -81,7 +81,7 @@ With several VCF files, either merge them into one file using SAMtools or run yo
 vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf-file2.vcf.gz >x.vg
 ```
 
-Then, you can get the reference, the VCF and the index. 
+Then, you can get the reference, the VCF and the index for each file. 
 ```sh
 # get the reference
 wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
@@ -193,7 +193,7 @@ singularity build image.sif docker://quay.io/vgteam/vg:v1.48.0
 singularity shell --bind data:/mnt image.sif
 
 # get the reference
-wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
+wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa && mv GRCh38_full_analysis_set_plus_decoy_hla.fa ref.fa
 
 # get the HGDP vcfs by changing the command : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
 # and rename the files as chr#.vcf.gz
@@ -236,6 +236,7 @@ bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP012
 ```
 
 And now with our actual commands to create the graph, considering all the VCFs and the reference files are in ```data``` and have not been indexed yet :
+NB : these commands are in a script called ```pangenome_script.sh```
 ```sh
 #!/bin/bash
 #SBATCH --job-name=myjob
@@ -250,28 +251,46 @@ And now with our actual commands to create the graph, considering all the VCFs a
 # go to the correct directory
 cd
 
-# index all the files
+# index all the files (this can be done in a function/loop)
+samtools faidx data/GRCh38_full_analysis_set_plus_decoy_hla.fa
+tabix -p vcf data/sub-chr1.vcf.gz
+tabix -p vcf data/sub-chr1.vcf.gz
+tabix -p vcf data/sub-chr2.vcf.gz
+tabix -p vcf data/sub-chr3.vcf.gz
+tabix -p vcf data/sub-chr4.vcf.gz
+tabix -p vcf data/sub-chr5.vcf.gz
+tabix -p vcf data/sub-chr6.vcf.gz
+tabix -p vcf data/sub-chr7.vcf.gz
+tabix -p vcf data/sub-chr8.vcf.gz
+tabix -p vcf data/sub-chr9.vcf.gz
+tabix -p vcf data/sub-chr10.vcf.gz
+tabix -p vcf data/sub-chr11.vcf.gz
+tabix -p vcf data/sub-chr12.vcf.gz
+tabix -p vcf data/sub-chr13.vcf.gz
+tabix -p vcf data/sub-chr14.vcf.gz
+tabix -p vcf data/sub-chr15.vcf.gz
+tabix -p vcf data/sub-chr16.vcf.gz
+tabix -p vcf data/sub-chr17.vcf.gz
+tabix -p vcf data/sub-chr18.vcf.gz
+tabix -p vcf data/sub-chr19.vcf.gz
+tabix -p vcf data/sub-chr20.vcf.gz
+tabix -p vcf data/sub-chr21.vcf.gz
+tabix -p vcf data/sub-chr22.vcf.gz
+tabix -p vcf data/sub-chrx.vcf.gz
+tabix -p vcf data/sub-chry.vcf.gz
 
 # load singularity
 module load singularity
-
-# create a script file with the commands to run in the same singularity container
-cat > sing-commands.sh <<EOF
-#!/bin/bash
 vg_construct () {
 	chr=$1
 	vcfLIST=$(while read iid; do echo "-v ./"chr${iid}".vcf.gz"; done )
 	singularity run /foa003/data/image.sif \
-	 vg construct -C -S -a -R chr${chr} -r GRCh38_full_analysis_set_plus_decoy_hla.fa \
-	  $vcfLIST \
+	 vg construct -C -S -a -R chr${chr} -r ref.fa \
+	  $vcfLIST \ 
+	  -v data/sub-chrx.vcf.gz -v data/sub-chry.vcf.gz \ 
 	  -t 1 -m 32 > ./sub-chr${chr}.vcf.gz
 }
-EOF
-chmod +x sing-commands.sh
-
-# Run the Singularity container with the script file as an argument
-singularity exec data/image.sif bash sing-commands.sh
-
+chmod +x script.sh
 ```
 Now, let's run the job.
 
