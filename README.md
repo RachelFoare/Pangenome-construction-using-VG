@@ -179,7 +179,16 @@ And run it :
 ```sh
 sbatch helloworld-advanced_script.sh
 ``` 
+Let's download all the VCF files and the reference file in a new directory called ```data``` :
 
+```sh
+cd
+mkdir data
+# get the reference
+wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
+# get the HGDP vcfs by changing the command : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz
+```
 
 And now with our actual commands to create the graph, considering all the VCFs and the reference files are in ```data``` and have not been indexed yet :
 ```sh
