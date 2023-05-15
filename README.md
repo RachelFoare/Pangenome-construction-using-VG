@@ -124,13 +124,78 @@ vg construct -r data/GRCh38_full_analysis_set_plus_decoy_hla.fa -v data/moza21.v
 ```
 
 # Using the HPC
+The HPC uses Slurm.
+Here are some basic but helpful commands :
 
-Use ```scontrol show partition``` to find out the status of the queue
+Running a job : ```sbatch jobscript-name.sh```
+Seeing the queue : ```squeue```
+Seeing details of the job using its ID : ```scontrol show job jobID```
+Deleting the job using its ID : ```scancel jobID```
 
-
+Changing the HPC resource configs :
+```sh
+#SBATCH --job-name=HelloWorld
+#SBATCH --time=01:00:00
+#SBATCH --ntasks=1
+#SBATCH --mem=500m
+#SBATCH --account=OD-012345
+```
 
 # Creating a Pangenome on the HPC
+Let's start with writting a complete .sh file that the HPC will be able to run.
+
+It can be useful to use 2 jobscripts, since all the vcfs need to run in the same singularity container. Let's write a script that will write another script containing the commands needed to run vg in singularity.
+Open a note pad, e.g. ```micro```.
+In the notepad, specify the resources needed for the job (i.e. job name, wall time, nodes, number of tasks, cpu, RAM, etc).
+
+Let's do a dummy script called ```helloworld_script.sh``` to test that :
+```sh
+```
+
+And run it : 
+```sh
+sbatch helloworld_script.sh
+```
+
+Printing HelloWorld is quite easy, now let's write a script called ```helloworld-advanced_script.sh```that will create and execute another script :
+```sh
+```
+
+And run it :
+```sh
+sbatch helloworld-advanced_script.sh
+``` 
 
 
+And now with our actual commands to create the graph :
+```sh
+#!/bin/bash
+#SBATCH --job-name=myjob
+#SBATCH --output=myjob_output.log
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=48:00:00
+#SBATCH --mem=128G
+#SBATCH --partition=your_partition_name
 
+# Load the Singularity module
+module load singularity
+# Create a script file with the commands you want to run
+cat > mycommands.sh <<EOF
+#!/bin/bash
+command1 --input-file1 /path/to/input/file1 --output-file1 /path/to/output/file1
+command2 --input-file2 /path/to/input/file2 --output-file2 /path/to/output/file2
+command3 --input-file3 /path/to/input/file3 --output-file3 /path/to/output/file3
+EOF
+chmod +x mycommands.sh
+
+# Run the Singularity container with the script file as an argument
+singularity exec data/image.sif bash mycommands.sh
+```
+Now, let's run the job.
+
+```sh
+sbatch pangenome_script.sh
+```
 
