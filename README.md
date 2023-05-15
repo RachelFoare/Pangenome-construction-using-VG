@@ -116,7 +116,7 @@ singularity shell --bind data:/mnt image.sif
 vg construct -r data/GRCh38_full_analysis_set_plus_decoy_hla.fa -v data/moza21.vcf.gz
 # error: no VCF header
 ```
-
+There is an error, apparently with the VCF file, probably bc of the zipping and unzipping
 
 
 
