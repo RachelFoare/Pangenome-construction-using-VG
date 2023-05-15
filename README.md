@@ -171,7 +171,7 @@ cat > my-2nd-script.sh <<EOF
 echo "Hello, world!"
 EOF
 
-chmod +x myscript.sh
+chmod +x my-2nd-script.sh
 ./my-2nd-script.sh
 ```
 
@@ -181,7 +181,7 @@ sbatch helloworld-advanced_script.sh
 ``` 
 
 
-And now with our actual commands to create the graph :
+And now with our actual commands to create the graph, considering all the VCFs and the reference files are in ```data``` and have not been indexed yet :
 ```sh
 #!/bin/bash
 #SBATCH --job-name=myjob
