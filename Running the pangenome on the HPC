@@ -1,0 +1,110 @@
+cd
+mkdir data
+cd data
+singularity build image.sif docker://quay.io/vgteam/vg:v1.48.0 
+singularity shell --bind data:/mnt image.sif
+
+# get the reference
+wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
+
+# get the HGDP vcfs by changing the command : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
+# and rename the files as chr#.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr1.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr2.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr3.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr4.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr5.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr6.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr7.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr8.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr9.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr10.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr11.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr12.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr13.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr14.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr15.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr16.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr17.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr18.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr19.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr20.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+
+
+
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr1.vcf.gz > bgzip > sub-chr1.vcf.gz
+
+
+
+
+
+# using a 2nd script
+
+#!/bin/bash
+#SBATCH --job-name=myjob
+#SBATCH --output=myjob_output.log
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=48:00:00
+#SBATCH --mem=128G
+#SBATCH --partition=your_partition_name
+
+# go to the correct directory
+cd
+
+# index all the files
+
+# load singularity
+module load singularity
+
+# create a script file with the commands to run in the same singularity container
+cat > sing-commands.sh <<EOF
+#!/bin/bash
+EOF
+chmod +x sing-commands.sh
+
+# Run the Singularity container with the script file as an argument
+singularity exec data/image.sif bash sing-commands.sh
+
+########################################################################################################
+# using a function
+
+#!/bin/bash
+#SBATCH --job-name=myjob
+#SBATCH --output=myjob_output.log
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=48:00:00
+#SBATCH --mem=128G
+#SBATCH --partition=your_partition_name
+
+# go to the correct directory
+cd
+
+# index all the files
+
+# load singularity
+module load singularity
+vg_construct () {
+	chr=$1
+	vcfLIST=$(while read iid; do echo "-v ./"chr${iid}".vcf.gz"; done )
+	singularity run /foa003/data/image.sif \
+	 vg construct -C -S -a -R chr${chr} -r GRCh38_full_analysis_set_plus_decoy_hla.fa \
+	  $vcfLIST \
+	  -t 1 -m 32 > ./sub-chr${chr}.vcf.gz
+}
+chmod +x sing-commands.sh
+
+
+
+
+
+
+
+
+
+
