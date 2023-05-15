@@ -111,28 +111,25 @@ The reference for the population IDs can be found here : https://www.internation
 Let's try and build a pangenome graph using chromosome 21 for the Mozambite population. 
 Let's start by indexing the reference and the vcf files :
 ```sh
+cd
 # index the ref file
-samtools faidx GRCh38_full_analysis_set_plus_decoy_hla.fa
+samtools faidx data/GRCh38_full_analysis_set_plus_decoy_hla.fa
 
-# zip and index the vcf 
-bgzip -c data/moza21.vcf.gz > data/moza21.vcf.gz                                                                                                                                                                   
+# index the vcf                                                                                                                                                                   
 tabix -p vcf data/moza21.vcf.gz 
 
 # run singularity
 singularity shell --bind data:/mnt image.sif
 vg construct -r data/GRCh38_full_analysis_set_plus_decoy_hla.fa -v data/moza21.vcf.gz
-# error: no VCF header
 ```
-There is an error, apparently with the VCF file, probably bc of the zipping process. Once the file is loaded, it has a header amd all the information we need. However, it cannot be indexed (?) so the solution is to zip it in .gz, but this seems to delete the content of the file.
+
+# Using the HPC
+
+Use ```scontrol show partition``` to find out the status of the queue
 
 
 
 # Creating a Pangenome on the HPC
-
-
-
-
-Use ```scontrol show partition``` to find out the status of the queue
 
 
 
