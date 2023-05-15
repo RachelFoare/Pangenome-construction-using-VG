@@ -127,6 +127,12 @@ There is an error, apparently with the VCF file, probably bc of the zipping proc
 
 
 
+# Creating a Pangenome on the HPC
+
+
+
+
+Use ```scontrol show partition``` to find out the status of the queue
 
 
 
