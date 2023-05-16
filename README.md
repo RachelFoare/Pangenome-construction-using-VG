@@ -163,7 +163,12 @@ echo "Hello, world!"
 
 And run it : 
 ```sh
-sbatch helloworld_script.sh
+ sbatch -A OD-221017 helloworld_script.sh
+ # to check the status of the jobs 
+ squeue -u foa003
+ # to see the output
+ ls
+ less slurm-jobID.out
 ```
 
 Printing HelloWorld is quite easy, now let's write a script called ```helloworld-advanced_script.sh```that will create and execute another script :
@@ -180,7 +185,12 @@ chmod +x my-2nd-script.sh
 
 And run it :
 ```sh
-sbatch helloworld-advanced_script.sh
+ sbatch -A OD-221017 echo.sh helloworld-advanced_script.sh
+ # to check the status of the jobs 
+ squeue -u foa003
+ # to see the output
+ ls
+ less slurm-jobID.out
 ``` 
 
 
