@@ -2,8 +2,8 @@ ssh -X FOA003@petrichor.hpc.csiro.au
 cd
 mkdir data
 cd data
-singularity build image.sif docker://quay.io/vgteam/vg:v1.48.0 
-singularity shell --bind data:/mnt image.sif
+
+
 
 # get the reference
 wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
