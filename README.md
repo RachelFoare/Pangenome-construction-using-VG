@@ -194,7 +194,10 @@ And run it :
  less slurm-jobID.out
 ``` 
 
-
+Before going to the next section, let's check if the singularity module is installed on the HPC :
+```sh
+ module avail
+```
 
 # Creating a Pangenome on the HPC
 
