@@ -68,13 +68,13 @@ bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP012
 # using a 2nd script
 
 #!/bin/bash
-#SBATCH --job-name=panjob
-#SBATCH --nodes=1
+#SBATCH --job-name=pangenome
+#SBATCH --nodes=1 #could be more since the tabix are independant
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --time=7-00
 #SBATCH --mem=128G
-#SBATCH --partition=partition-pangenome
+#SBATCH --partition= # la partition a laquelle je peux faire un job avec bcp de donnees
 
 # go to the correct directory
 cd
