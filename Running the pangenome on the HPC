@@ -1,3 +1,4 @@
+ssh -X FOA003@petrichor.hpc.csiro.au 
 cd
 mkdir data
 cd data
