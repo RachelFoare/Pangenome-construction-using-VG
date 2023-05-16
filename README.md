@@ -165,8 +165,9 @@ echo "Hello, world!"
 And run it : 
 ```sh
  sbatch -A OD-221017 helloworld_script.sh
+ # the -A is not always needed, in this case and witht his HPC it was required to specify a project ID
  # to check the status of the jobs 
- squeue -u foa003
+ squeue -u username
  # to see the output
  ls
  less slurm-jobID.out
@@ -188,7 +189,7 @@ And run it :
 ```sh
  sbatch -A OD-221017 echo.sh helloworld-advanced_script.sh
  # to check the status of the jobs 
- squeue -u foa003
+ squeue -u username
  # to see the output
  ls
  less slurm-jobID.out
