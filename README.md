@@ -136,9 +136,13 @@ The HPC uses Slurm.
 Here are some basic but helpful commands :
 
 Running a job : ```sbatch jobscript-name.sh```
+
 Seeing the queue : ```squeue```
+
 Seeing details of the job using its ID : ```scontrol show job jobID```
+
 Deleting the job using its ID : ```scancel jobID```
+
 Seeing the differennt partitions : ```sinfo```
 
 Changing the HPC resource configs :
