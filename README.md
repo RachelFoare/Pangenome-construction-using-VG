@@ -204,6 +204,9 @@ Before going to the next section, let's check if the singularity module is insta
  module avail
 ```
 
+# Accessing CSIRO's HPC -- data manager 
+The documentation about accessing the data manager to download files with a large amount of data can be found [here](https://confluence.csiro.au/display/SC/CSIRO+SC+Shared+Cluster+-+Petrichor).
+
 # Creating a Pangenome on the HPC
 
 
