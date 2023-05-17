@@ -211,8 +211,6 @@ Let's download all the VCF files, the reference file and the container image in 
 cd
 mkdir data
 cd data
-singularity build image.sif docker://quay.io/vgteam/vg:v1.48.0 
-singularity shell --bind data:/mnt image.sif
 
 # get the reference
 wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa && mv GRCh38_full_analysis_set_plus_decoy_hla.fa ref.fa
@@ -301,16 +299,18 @@ tabix -p vcf data/sub-chr22.vcf.gz
 tabix -p vcf data/sub-chrx.vcf.gz
 tabix -p vcf data/sub-chry.vcf.gz
 
+# create a script file with the commands to run in the same singularity container
+cat > sing-commands.sh <<EOF
+#!/bin/bash
+vg construct -r data/ref.fa -v data/sub-chr1.vcf.gz -v data/sub-chr2.vcf.gz -v data/sub-chr3.vcf.gz -v data/sub-chr4.vcf.gz -v data/sub-chr5.vcf.gz -v data/sub-chr6.vcf.gz -v data/sub-chr7.vcf.gz -v data/sub-chr8.vcf.gz -v data/sub-chr9.vcf.gz -v data/sub-chr10.vcf.gz -v data/sub-chr11.vcf.gz -v data/sub-chr12.vcf.gz -v data/sub-chr13.vcf.gz -v data/sub-chr14.vcf.gz -v data/sub-chr15.vcf.gz -v data/sub-chr16.vcf.gz -v data/sub-chr17.vcf.gz -v data/sub-chr18.vcf.gz -v data/sub-chr19.vcf.gz -v data/sub-chr20.vcf.gz -v data/sub-chr21.vcf.gz -v data/sub-chr22.vcf.gz -v data/sub-chrx.vcf.gz -v data/sub-chry.vcf.gz
+EOF
+chmod +x sing-commands.sh
+
 # load singularity
 module load singularity
-vg_construct () {
-	chr=$1
-	vcfLIST=$(while read iid; do echo "-v ./"chr${iid}".vcf.gz"; done )
-	singularity run /foa003/data/image.sif \
-	 vg construct -C -S -a -R chr${chr} -r ref.fa \
-	  $vcfLIST \ 
-	  -v data/sub-chrx.vcf.gz -v data/sub-chry.vcf.gz \ 
-	  -t 1 -m 32 > ./sub-chr${chr}.vcf.gz
+
+# Run the Singularity container with the script file as an argument
+singularity exec data/image.sif bash sing-commands.sh
 }
 chmod +x script.sh
 ```
