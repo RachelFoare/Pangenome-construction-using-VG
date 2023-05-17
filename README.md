@@ -228,7 +228,7 @@ org.label-schema.usage.singularity.version: 3.7.3
 It can be useful to use 2 jobscripts, since all the vcfs need to run in the same singularity container. It is possible to write a script that will write another script containing the commands needed to run vg in singularity. Otherwise, a simple loop can do the trick. See both ways [here](https://github.com/RachelFoare/Pangenome-construction-using-VG/blob/main/Running%20the%20pangenome%20on%20the%20HPC)
 Let's download all the VCF files, the reference file and the container image in a new directory called ```data``` :
 
-Note : All the data has actually been retrieved with a batch job, using the ```wget``` commands in a shell script 
+Note : All the data has actually been retrieved with a batch job, using the ```wget``` commands in a shell script, so that the download could run freely. 
 
 ```sh
 cd
