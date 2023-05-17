@@ -211,6 +211,16 @@ IIt is important to make sure the data is stored in the right place so i dooesn'
 Access the petrichor-dm using this command : ```sinteractive -p io -A OD-221017  -t 2:00:00```
 Then access the user's datastore directory using : ```cd /datastore/foa003```
 
+Note : When building the image in Singularity with ```singularity inspect image.sif```, checking the image returns the following :
+```sh
+org.label-schema.build-arch: amd64
+org.label-schema.build-date: Wednesday_17_May_2023_14:4:21_AEST
+org.label-schema.schema-version: 1.0
+org.label-schema.usage.singularity.deffile.bootstrap: docker
+org.label-schema.usage.singularity.deffile.from: quay.io/vgteam/vg:v1.48.0
+org.label-schema.usage.singularity.version: 3.7.3
+
+```
 # Creating a Pangenome on the HPC
 
 
