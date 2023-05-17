@@ -154,6 +154,7 @@ Changing the HPC resource configs :
 #SBATCH --account=OD-012345
 ```
 
+Access the HPC using PuTTY to have an SSH connection (note : this part was done on Windows)
 
 Let's start with writting a complete .sh file that the HPC will be able to run.
 
@@ -206,6 +207,7 @@ Before going to the next section, let's check if the singularity module is insta
 
 # Accessing CSIRO's HPC -- data manager 
 The documentation about accessing the data manager to download files with a large amount of data can be found [here](https://confluence.csiro.au/display/SC/CSIRO+SC+Shared+Cluster+-+Petrichor).
+IIt is important to make sure the data is stored in the right place so i dooesn't get 'flushed' (i.e. deleted)
 Access the petrichor-dm using this command : ```sinteractive -p io -A OD-221017  -t 2:00:00```
 Then access the user's datastore directory using : ```cd /datastore/foa003```
 
