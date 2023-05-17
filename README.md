@@ -222,7 +222,9 @@ Let's download all the VCF files, the reference file and the container image in 
 cd
 mkdir data
 cd data
-
+# get the image
+module load singularity
+singularity build image.sif docker://quay.io/vgteam/vg:v1.48.0 
 # get the reference
 wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa && mv GRCh38_full_analysis_set_plus_decoy_hla.fa ref.fa
 
