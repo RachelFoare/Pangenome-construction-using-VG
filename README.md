@@ -122,7 +122,7 @@ tabix -p vcf data/moza21.vcf.gz
 # or using bcftools
 bcftools index moza21.vcf.gz 
 
-# run singularity
+# run singularity => in this case, done with the HPC
 singularity shell --bind data:/mnt image.sif
 vg construct -r data/GRCh38_full_analysis_set_plus_decoy_hla.fa -v data/moza21.vcf.gz
 ```
