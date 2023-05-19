@@ -178,7 +178,7 @@ And run it :
  less slurm-jobID.out
 ```
 
-Printing HelloWorld is quite easy, now let's write a script called ```helloworld-advanced_script.sh```that will create and execute another script :
+Now let's write a script called ```helloworld-advanced_script.sh```that will create and execute another script :
 ```sh
 #!/bin/bash
 cat > my-2nd-script.sh <<EOF
@@ -208,8 +208,8 @@ Before going to the next section, let's check if the singularity module is insta
 # Accessing CSIRO's HPC -- data manager 
 The documentation about accessing the data manager to download files with a large amount of data can be found [here](https://confluence.csiro.au/display/SC/CSIRO+SC+Shared+Cluster+-+Petrichor).
 IIt is important to make sure the data is stored in the right place so i dooesn't get 'flushed' (i.e. deleted)
-Access the petrichor-dm using this command : ```sinteractive -p io -A OD-221017  -t 2:00:00```
-Then access the user's datastore directory using : ```cd /datastore/foa003```
+Access the petrichor-dm interactive session using this command : ```sinteractive -p io -A JOBID  -t 2:00:00```
+Access the user's datastore directory using : ```cd /datastore/username```
 
 Note : When building the image in Singularity with ```singularity inspect image.sif```, checking the image returns the following :
 ```sh
@@ -228,10 +228,10 @@ org.label-schema.usage.singularity.version: 3.7.3
 It can be useful to use 2 jobscripts, since all the vcfs need to run in the same singularity container. It is possible to write a script that will write another script containing the commands needed to run vg in singularity. Otherwise, a simple loop can do the trick. See both ways [here](https://github.com/RachelFoare/Pangenome-construction-using-VG/blob/main/Running%20the%20pangenome%20on%20the%20HPC)
 Let's download all the VCF files, the reference file and the container image in a new directory called ```data``` :
 
-Note : All the data has actually been retrieved with a batch job, using the ```wget``` commands in a shell script, so that the download could run freely.  
+Note : All the data has actually been retrieved with a batch job, using the ```wget``` commands in a shell script, so that the downloads could run effectively.  
 
 ```sh
-cd
+cd /datastore/username
 mkdir data
 cd data
 # get the image
@@ -242,44 +242,49 @@ wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_refer
 
 # get the HGDP vcfs by changing the command : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
 # and rename the files as chr#.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr1.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr2.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr3.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr4.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr5.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr6.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr7.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr8.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr9.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr10.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr11.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr12.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr13.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr14.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr15.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr16.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr17.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr18.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr19.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr20.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr1.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr2.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr3.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr4.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr5.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr6.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr7.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr8.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr9.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr10.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr11.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr12.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr13.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr14.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr15.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr16.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr17.vcf.gz
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr18.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr19.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr20.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz 
+wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz 
 ```
 
-Let's do the subsets with each VCF file in a loop :
+It is possible to do the subsets with each VCF file in a loop :
 ```sh
 subset() {
  chr=$1
  vcfLIST=$(while read iid; do echo "-v ./"chr${iid}".vcf.gz"; done )
  cd data
+ module load bcftools
  bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr${chr}.vcf.gz > bgzip > sub-${chr}.vcf.gz
 }
 ```
 It can also be done by simply changing the name of the file as follows :
 ```sh
+module load bcftools
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr1.vcf.gz > bgzip > sub-chr1.vcf.gz
 ```
 
+
+
+########################################################################################################################################################
 And now with our actual commands to create the graph, considering all the VCFs and the reference files are in ```data``` and have not been indexed yet :
 NB : these commands are in a script called ```pangenome_script.sh```
 ```sh
@@ -294,9 +299,10 @@ NB : these commands are in a script called ```pangenome_script.sh```
 #SBATCH --partition=your_partition_name
 
 # go to the correct directory
-cd
+cd /datastore/username
 
 # index all the files (this can be done in a function/loop)
+module load samtools
 samtools faidx data/GRCh38_full_analysis_set_plus_decoy_hla.fa
 tabix -p vcf data/sub-chr1.vcf.gz
 tabix -p vcf data/sub-chr1.vcf.gz
