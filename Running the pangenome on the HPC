@@ -1,4 +1,4 @@
-ssh -X FOA003@petrichor.hpc.csiro.au 
+
 cd
 mkdir data
 cd data
@@ -10,6 +10,7 @@ wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_refer
 
 # get the HGDP vcfs by changing the command : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
 # and rename the files as chr#.vcf.gz
+# note that i did not doo this changes in these command lines, careful you dont want 22 files called chr1.vcf
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr1.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr2.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr3.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
@@ -32,8 +33,7 @@ wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr20.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chr1.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chrx.vcf.gz
-wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf.gz && mv hgdp_wgs.20190516.full.chr1.vcf.gz chry.vcf.gz
+
 
 
 
@@ -59,8 +59,7 @@ bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP012
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr20.vcf.gz > bgzip > sub-chr20.vcf.gz
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr21.vcf.gz > bgzip > sub-chr21.vcf.gz
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr22.vcf.gz > bgzip > sub-chr22.vcf.gz
-bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chrx.vcf.gz > bgzip > sub-chrx.vcf.gz
-bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chry.vcf.gz > bgzip > sub-chry.vcf.gz
+
 
 
 
@@ -104,13 +103,12 @@ tabix -p vcf data/sub-chr19.vcf.gz
 tabix -p vcf data/sub-chr20.vcf.gz
 tabix -p vcf data/sub-chr21.vcf.gz
 tabix -p vcf data/sub-chr22.vcf.gz
-tabix -p vcf data/sub-chrx.vcf.gz
-tabix -p vcf data/sub-chry.vcf.gz
+
 
 # create a script file with the commands to run in the same singularity container
 cat > sing-commands.sh <<EOF
 #!/bin/bash
-vg construct -r data/ref.fa -v data/sub-chr1.vcf.gz -v data/sub-chr2.vcf.gz -v data/sub-chr3.vcf.gz -v data/sub-chr4.vcf.gz -v data/sub-chr5.vcf.gz -v data/sub-chr6.vcf.gz -v data/sub-chr7.vcf.gz -v data/sub-chr8.vcf.gz -v data/sub-chr9.vcf.gz -v data/sub-chr10.vcf.gz -v data/sub-chr11.vcf.gz -v data/sub-chr12.vcf.gz -v data/sub-chr13.vcf.gz -v data/sub-chr14.vcf.gz -v data/sub-chr15.vcf.gz -v data/sub-chr16.vcf.gz -v data/sub-chr17.vcf.gz -v data/sub-chr18.vcf.gz -v data/sub-chr19.vcf.gz -v data/sub-chr20.vcf.gz -v data/sub-chr21.vcf.gz -v data/sub-chr22.vcf.gz -v data/sub-chrx.vcf.gz -v data/sub-chry.vcf.gz
+vg construct -r data/ref.fa -v data/sub-chr1.vcf.gz -v data/sub-chr2.vcf.gz -v data/sub-chr3.vcf.gz -v data/sub-chr4.vcf.gz -v data/sub-chr5.vcf.gz -v data/sub-chr6.vcf.gz -v data/sub-chr7.vcf.gz -v data/sub-chr8.vcf.gz -v data/sub-chr9.vcf.gz -v data/sub-chr10.vcf.gz -v data/sub-chr11.vcf.gz -v data/sub-chr12.vcf.gz -v data/sub-chr13.vcf.gz -v data/sub-chr14.vcf.gz -v data/sub-chr15.vcf.gz -v data/sub-chr16.vcf.gz -v data/sub-chr17.vcf.gz -v data/sub-chr18.vcf.gz -v data/sub-chr19.vcf.gz -v data/sub-chr20.vcf.gz -v data/sub-chr21.vcf.gz -v data/sub-chr22.vcf.gz
 EOF
 chmod +x sing-commands.sh
 
@@ -161,8 +159,6 @@ tabix -p vcf data/sub-chr19.vcf.gz
 tabix -p vcf data/sub-chr20.vcf.gz
 tabix -p vcf data/sub-chr21.vcf.gz
 tabix -p vcf data/sub-chr22.vcf.gz
-tabix -p vcf data/sub-chrx.vcf.gz
-tabix -p vcf data/sub-chry.vcf.gz
 
 # load singularity
 module load singularity
