@@ -301,6 +301,9 @@ Then use the ```pbgzip``` command and the ```tabix``` command to index all the v
  # and run a job containing the following commands for each vcf file :
  pbgzip sub-chr21.vcf
  tabix -p vcf sub-chr21.vcf.gz
+ 
+ # once the reference has been indexed, make sure you also have access to an unindexed version
+ gunzip ref.fa.gz
 ```
 
 ########################################################################################################################################################
