@@ -294,16 +294,17 @@ It is possible that the HPC does not have the required tools such as bgzip or ta
 Then use the ```pbgzip``` command and the ```tabix``` command to index all the vcfs, and use ```samtools faidx``` to index the reference.
 
 ```sh
- pbgzip ref.fa
  module load samtools
- samtools faidx ref.fa.gz
+ samtools faidx ref.fa
  
  # and run a job containing the following commands for each vcf file :
  pbgzip sub-chr21.vcf
  tabix -p vcf sub-chr21.vcf.gz
  
- # once the reference has been indexed, make sure you also have access to an unindexed version
+ # if you have trouble using samtools faidx, try zipping the ref.fa file with pbgzip and the unzip it and try again
+ pbgzip ref.fa
  gunzip ref.fa.gz
+ samtools faidx ref.fa
 ```
 
 ########################################################################################################################################################
