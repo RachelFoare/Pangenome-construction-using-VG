@@ -59,6 +59,15 @@ This will open a temporary sandbox, that you can ```exit``` at anytime.
 If needed, it is possible to run several instances of the image at the same time, see [here](https://docs.sylabs.io/guides/3.0/user-guide/running_services.html).
 
 
+
+Then, you can get the reference, the VCF and the index for each file. 
+```sh
+# get the reference
+wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
+# get the HGDP vcfs by changing the command with the correct files found here depending on the requested chromosome : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
+ wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz
+```
+
 Now vg can be launched :
 ```sh
 vg help 
@@ -79,14 +88,6 @@ With several VCF files, either merge them into one file using SAMtools or run yo
 
 ```sh
 vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf-file2.vcf.gz >x.vg
-```
-
-Then, you can get the reference, the VCF and the index for each file. 
-```sh
-# get the reference
-wget https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/GRCh38_reference_genome/GRCh38_full_analysis_set_plus_decoy_hla.fa
-# get the HGDP vcfs by changing the command with the correct files found here depending on the requested chromosome : https://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/
- wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr21.vcf.gz
 ```
 
 
