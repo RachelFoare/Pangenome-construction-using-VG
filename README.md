@@ -304,7 +304,7 @@ Then use the ```pbgzip``` command and the ```tabix``` command to index all the v
 ```
 
 ########################################################################################################################################################
-And now with our actual commands to create the graph, considering all the VCFs and the reference files are in ```data``` and have not been indexed yet :
+And now with our actual commands to create the graph :
 NB : these commands are in a script called ```pangenome_script.sh```
 ```sh
 #!/bin/bash
@@ -320,34 +320,7 @@ NB : these commands are in a script called ```pangenome_script.sh```
 # go to the correct directory
 cd /datastore/username
 
-# index all the files (this can be done in a function/loop)
-module load samtools
-samtools faidx data/GRCh38_full_analysis_set_plus_decoy_hla.fa
-tabix -p vcf data/sub-chr1.vcf.gz
-tabix -p vcf data/sub-chr1.vcf.gz
-tabix -p vcf data/sub-chr2.vcf.gz
-tabix -p vcf data/sub-chr3.vcf.gz
-tabix -p vcf data/sub-chr4.vcf.gz
-tabix -p vcf data/sub-chr5.vcf.gz
-tabix -p vcf data/sub-chr6.vcf.gz
-tabix -p vcf data/sub-chr7.vcf.gz
-tabix -p vcf data/sub-chr8.vcf.gz
-tabix -p vcf data/sub-chr9.vcf.gz
-tabix -p vcf data/sub-chr10.vcf.gz
-tabix -p vcf data/sub-chr11.vcf.gz
-tabix -p vcf data/sub-chr12.vcf.gz
-tabix -p vcf data/sub-chr13.vcf.gz
-tabix -p vcf data/sub-chr14.vcf.gz
-tabix -p vcf data/sub-chr15.vcf.gz
-tabix -p vcf data/sub-chr16.vcf.gz
-tabix -p vcf data/sub-chr17.vcf.gz
-tabix -p vcf data/sub-chr18.vcf.gz
-tabix -p vcf data/sub-chr19.vcf.gz
-tabix -p vcf data/sub-chr20.vcf.gz
-tabix -p vcf data/sub-chr21.vcf.gz
-tabix -p vcf data/sub-chr22.vcf.gz
-tabix -p vcf data/sub-chrx.vcf.gz
-tabix -p vcf data/sub-chry.vcf.gz
+
 
 # create a script file with the commands to run in the same singularity container
 cat > sing-commands.sh <<EOF
