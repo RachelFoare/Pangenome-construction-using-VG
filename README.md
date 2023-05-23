@@ -307,43 +307,18 @@ Then use the ```pbgzip``` command and the ```tabix``` command to index all the v
  samtools faidx ref.fa
 ```
 
-########################################################################################################################################################
 And now with our actual commands to create the graph :
 NB : these commands are in a script called ```pangenome_script.sh```
 ```sh
 #!/bin/bash
-#SBATCH --job-name=myjob
-#SBATCH --output=myjob_output.log
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
+#SBATCH --time=8:00:00
 #SBATCH --cpus-per-task=16
-#SBATCH --time=48:00:00
-#SBATCH --mem=128G
-#SBATCH --partition=your_partition_name
-
-# go to the correct directory
-cd /datastore/username
+#SBATCH --mem=256G
 
 
-
-# create a script file with the commands to run in the same singularity container
-cat > sing-commands.sh <<EOF
-#!/bin/bash
-vg construct -r data/ref.fa -v data/sub-chr1.vcf.gz -v data/sub-chr2.vcf.gz -v data/sub-chr3.vcf.gz -v data/sub-chr4.vcf.gz -v data/sub-chr5.vcf.gz -v data/sub-chr6.vcf.gz -v data/sub-chr7.vcf.gz -v data/sub-chr8.vcf.gz -v data/sub-chr9.vcf.gz -v data/sub-chr10.vcf.gz -v data/sub-chr11.vcf.gz -v data/sub-chr12.vcf.gz -v data/sub-chr13.vcf.gz -v data/sub-chr14.vcf.gz -v data/sub-chr15.vcf.gz -v data/sub-chr16.vcf.gz -v data/sub-chr17.vcf.gz -v data/sub-chr18.vcf.gz -v data/sub-chr19.vcf.gz -v data/sub-chr20.vcf.gz -v data/sub-chr21.vcf.gz -v data/sub-chr22.vcf.gz -v data/sub-chrx.vcf.gz -v data/sub-chry.vcf.gz
-EOF
-chmod +x sing-commands.sh
-
-# load singularity
+cd /datastore/foa003
 module load singularity
 
-# Run the Singularity container with the script file as an argument
-singularity exec data/image.sif bash sing-commands.sh
-}
-chmod +x script.sh
+singularity exec --bind /datastore/user/data:/datastore/user/data image.sif vg construct -r /datastore/user/data/ref.fa -v /datastore/user/data/sub-chr21.vcf.gz >/datastore/user/data/p21.vg
 ```
-Now, let's run the job.
-
-```sh
-sbatch pangenome_script.sh
-```
-
+REpeat this command for each chromosome by running multiple jobs, for instance with a loop.
