@@ -321,4 +321,11 @@ module load singularity
 
 singularity exec --bind /datastore/user/data:/datastore/user/data image.sif vg construct -r /datastore/user/data/ref.fa -v /datastore/user/data/sub-chr21.vcf.gz >/datastore/user/data/p21.vg
 ```
-REpeat this command for each chromosome by running multiple jobs, for instance with a loop.
+Repeat this command for each chromosome by running multiple jobs, for instance with a loop (see below for a similar loop with the nodes coordination) :
+
+```sh
+module load singularity
+
+singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg ids -j $(for i in $(seq 1 22); do echo p$i.vg; done)
+```
+
