@@ -283,7 +283,7 @@ module load bcftools
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr1.vcf.gz > bgzip > sub-chr1.vcf.gz
 ```
 
-It is possible that the HPC does not have the required tools such as bgzip or tabix to index the files, so make sur it is, otherwise install conda, then pbgzip and tabix from bioconda
+It is possible that the HPC does not have the required tools such as bgzip or tabix to index the files in their module (look for  ```htslib```), so make sure it is, otherwise install conda, then pbgzip and tabix from bioconda
 ```sh
  wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.3.1-0-Linux-x86_64.sh
  conda create -n environment
