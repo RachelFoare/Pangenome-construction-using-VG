@@ -110,8 +110,7 @@ Warn: subset called for sample that does not exist in header: "HGDP01273"... ski
 
 The reference for the population IDs can be found here : https://www.internationalgenome.org/data-portal/population/MozabiteHGDP 
 
-![Alt text](http://full/path/to/img.jpg "Population-Specific Pangenome Graph of Chromosome 21 for Mozabite People with MAF>0.01
-")
+![Alt text](https://github.com/vgteam/vg/raw/master/doc/figures/pipeline_flowchart.svg "VG Pipeline")
 
 
 # Using the HPC
