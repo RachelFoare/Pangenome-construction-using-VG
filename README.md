@@ -72,7 +72,11 @@ Now vg can be launched :
 ```sh
 vg help 
 ```
-Note that before starting to build a graph, an index of the VCF and FASTA files are required. 
+Note that before starting to build a graph, an index of the VCF and FASTA files are required, as shown in the pipeline :
+
+![Alt text](https://github.com/vgteam/vg/raw/master/doc/figures/pipeline_flowchart.svg "VG Pipeline")
+
+
 
 The VCF index file can be generated using the tabix command provided by SAMtools : ``` tabix -p vcf your-vcf-file.vcf.gz``` 
 
@@ -110,7 +114,7 @@ Warn: subset called for sample that does not exist in header: "HGDP01273"... ski
 
 The reference for the population IDs can be found here : https://www.internationalgenome.org/data-portal/population/MozabiteHGDP 
 
-![Alt text](https://github.com/vgteam/vg/raw/master/doc/figures/pipeline_flowchart.svg "VG Pipeline")
+
 
 
 # Using the HPC
