@@ -72,7 +72,7 @@ Now vg can be launched :
 ```sh
 vg help 
 ```
-Note that before starting to build a graph, an index of the VCF and FASTA files are required, as shown in the pipeline :
+Note that before starting to build a graph, an index of the VCF and FASTA files are required, referenced in the following pipeline as ```.fai``` and ```.tbi``` :
 
 ![Alt text](https://github.com/vgteam/vg/raw/master/doc/figures/pipeline_flowchart.svg "VG Pipeline")
 
