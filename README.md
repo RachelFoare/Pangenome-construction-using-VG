@@ -325,4 +325,4 @@ module load singularity
 
 singularity exec --bind /datastore/foa003/data:/datastore/user/data image.sif vg index -x /datastore/user/data/wgx.xg $(for i in $(seq 1 22); do echo data/p$i.vg; done)
 ```
-Befor indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to remove complex regions.
+Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to mask out complex regions.
