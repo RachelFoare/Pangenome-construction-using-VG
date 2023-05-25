@@ -101,7 +101,7 @@ First, let's try it out on a single vcf file, here chromosome 21.
 Here is the command line to exclusively keep the target population and MAF and put it in a new and compressed vcf file :
 ```sh
 cd data
-bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' hgdp_21.vcf.gz > bgzip > moza21.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' hgdp_21.vcf.gz > bgzip > sub21.vcf.gz
 ```
 When creating this subset with this population, one individual is apparently not in the VCF file but was listed in HGDP documentation 
 ```sh
@@ -109,24 +109,6 @@ Warn: subset called for sample that does not exist in header: "HGDP01273"... ski
 ```
 
 The reference for the population IDs can be found here : https://www.internationalgenome.org/data-portal/population/MozabiteHGDP 
-
-# Pangenome trial run
-Let's try and build a pangenome graph using chromosome 21 for the Mozambite population. 
-Let's start by indexing the reference and the vcf files :
-```sh
-cd
-# index the ref file
-samtools faidx data/GRCh38_full_analysis_set_plus_decoy_hla.fa
-
-# index the vcf using tabix                                                                                                                                                                  
-tabix -p vcf data/moza21.vcf.gz 
-# or using bcftools
-bcftools index moza21.vcf.gz 
-
-# run singularity => in this case, done with the HPC
-singularity shell --bind data:/mnt image.sif
-vg construct -r data/GRCh38_full_analysis_set_plus_decoy_hla.fa -v data/moza21.vcf.gz
-```
 
 ![Alt text](http://full/path/to/img.jpg "Population-Specific Pangenome Graph of Chromosome 21 for Mozabite People with MAF>0.01
 ")
@@ -308,7 +290,7 @@ Then use the ```pbgzip``` command and the ```tabix``` command to index all the v
 ```
 
 And now with our actual commands to create the graph :
-NB : these commands are in a script called ```pangenome_script.sh```
+NB : these commands are in a script called ```pangenome_script.sh``` and for chromosome 21 specifically.
 ```sh
 #!/bin/bash
 #SBATCH --time=8:00:00
@@ -321,7 +303,7 @@ module load singularity
 
 singularity exec --bind /datastore/user/data:/datastore/user/data image.sif vg construct -r /datastore/user/data/ref.fa -v /datastore/user/data/sub-chr21.vcf.gz >/datastore/user/data/p21.vg
 ```
-Repeat this command for each chromosome by running multiple jobs, for instance with a loop (see below for a similar loop with the nodes coordination) :
+The nodes need to be coordinated like so :
 
 ```sh
 module load singularity
@@ -329,3 +311,4 @@ module load singularity
 singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg ids -j $(for i in $(seq 1 22); do echo p$i.vg; done)
 ```
 
+And then indexed as .xg #and# .gcsa files :
