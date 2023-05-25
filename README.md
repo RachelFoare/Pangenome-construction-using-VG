@@ -311,4 +311,4 @@ module load singularity
 singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg ids -j $(for i in $(seq 1 22); do echo p$i.vg; done)
 ```
 
-And then indexed as .xg **and** .gcsa files :
+And then indexed as ```.xg``` **and** ```.gcsa``` files :
