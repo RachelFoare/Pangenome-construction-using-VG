@@ -311,7 +311,9 @@ module load singularity
 singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg ids -j $(for i in $(seq 1 22); do echo p$i.vg; done)
 ```
 
-And then indexed as ```wgx.xg``` **and** ```wg.gcsa``` files. Note that this batch was run with 1TB of RAM, but at least 1.5TB is ideal.
+And then indexed as ```wgx.xg``` **and** ```wg.gcsa``` files. 
+
+The following lines index the pangenomes as ```wgx.xg```. Note that this batch was run with 1TB of RAM, but at least 1.5TB is ideal.
 ```sh
 #!/bin/bash
 #SBATCH --time=8:00:00
@@ -323,4 +325,4 @@ module load singularity
 
 singularity exec --bind /datastore/foa003/data:/datastore/user/data image.sif vg index -x /datastore/user/data/wgx.xg $(for i in $(seq 1 22); do echo data/p$i.vg; done)
 ```
-
+Befor indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to remove complex regions.
