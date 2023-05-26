@@ -209,7 +209,9 @@ org.label-schema.usage.singularity.version: 3.7.3
 ```
 # Creating a Pangenome on the HPC
 
-
+File system convention :
+- the files containing the data are stored in /datastore/user/data
+- the job scripts are created and ran in /scratch3/user
 
 It can be useful to use 2 jobscripts, since all the vcfs need to run in the same singularity container. It is possible to write a script that will write another script containing the commands needed to run vg in singularity. Otherwise, a simple loop can do the trick. See both ways [here](https://github.com/RachelFoare/Pangenome-construction-using-VG/blob/main/Running%20the%20pangenome%20on%20the%20HPC)
 Let's download all the VCF files, the reference file and the container image in a new directory called ```data``` :
