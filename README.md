@@ -357,4 +357,10 @@ These criteria can be found and measured using vg, the ```Picard``` module and S
 The stats will be calculated by the results of the alignment of Bedouin reads to the graph, and the alignment of the same individuals on the linear reference.
 The linear alignments can be found [here](https://www.internationalgenome.org/data-portal/sample), with the specified population (Bedouin, not Bedouin B).
 
+Those alignments are ```.cram``` files, therefore need to be converted to ```.bam``` files, like so for individual HGDP00607 :
+```sh
+module load samtools
+samtools view -b -T ref.fa -o alig_bam.bam HGDP00607.alt_bwamem_GRCh38DH.20181023.Bedouin.cram
+```
+
 
