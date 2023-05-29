@@ -354,13 +354,9 @@ Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to ma
 
 In order to properly assess the performance of the graph, it is essential to examine criteria reflecting the quality of the alignment of the graph with the reads of an external group remaining genetically close, and compare it with the same alignment with the original linear reference used to build the pangenome. 
 These criteria can be found and measured using vg, the ```Picard``` module and SAMtools.
-The stats will be calculated by the results of the alignment of Bedouin reads to the graph, and the alignment of the same individuals on the linear reference.
+The stats will be calculated by the results of the alignment of Bedouin reads to the graph, and an alignment of the same individuals on the linear reference.
 The linear alignments can be found [here](https://www.internationalgenome.org/data-portal/sample), with the specified population (Bedouin, not Bedouin B).
+However in this case it was decided to redo the alignments in order to keep track of the methodology. 
 
-Those alignments are ```.cram``` files, therefore need to be converted to ```.bam``` files, like so for individual HGDP00607 :
-```sh
-module load samtools
-samtools view -b -T ref.fa -o alig_bam.bam HGDP00607.alt_bwamem_GRCh38DH.20181023.Bedouin.cram
-```
 
 
