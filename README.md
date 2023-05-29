@@ -358,7 +358,7 @@ The stats will be calculated by the results of the alignment of Bedouin reads to
 The linear alignments can be found [here](https://www.internationalgenome.org/data-portal/sample), with the specified population (Bedouin, not Bedouin B).
 However in this case it was decided to redo the alignments in order to keep track of the methodology using ```bowtie 2.5.1```, using the FASTA files of the reads.
 Due to lack of time and storage, 5 sequences of Bedouin people from HGDP and 2 from SGDP are used for the alignments. The 5 samples from HGDP were picked randomly. 
-Let's start by downloading the FASTA file for this individual SAMEA3302823, and indexing the reference file :
+Let's start by downloading the FASTA file for this individual (HGDP00616), and indexing the reference file :
 
 ```sh
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR141/002/ERR1419132/ERR1419132_2.fastq.gz
