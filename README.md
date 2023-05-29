@@ -357,10 +357,12 @@ These criteria can be found and measured using vg, the ```Picard``` module and S
 The stats will be calculated by the results of the alignment of Bedouin reads to the graph, and an alignment of the same individuals on the linear reference.
 The linear alignments can be found [here](https://www.internationalgenome.org/data-portal/sample), with the specified population (Bedouin, not Bedouin B).
 However in this case it was decided to redo the alignments in order to keep track of the methodology using ```bowtie 2.5.1```, using the FASTA files of the reads.
-Let's start by downloading the FASTA file for this individual HGDP00607 :
+Let's start by downloading the FASTA file for this individual HGDP00607, and indexing the reference file :
 
 ```sh
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR145/007/ERR1451677/ERR1451677_1.fastq.gz
+module load bowtie
+bowtie2-build reference.fasta reference_index
 ```
 
 
