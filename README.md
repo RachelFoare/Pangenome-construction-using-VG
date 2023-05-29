@@ -21,7 +21,7 @@ Install SAMTools (Sequence Alignment/Map) via conda :
 ```sh
 conda install -c bioconda samtools
 ```
-SAMTools will be used later to edit the VCF files to make subgroups with 0.1% minor allele frequency or above, and to merge all VCF files into one.
+SAMTools will be used later to edit the VCF files to make subgroups with 0.1% minor allele frequency or above.
 
 Creating an environment, here ```pang```, in conda :
 ```sh
@@ -57,7 +57,7 @@ Assume the files are in the directory ```data``` :
 ```sh
 singularity shell --bind data:/mnt image.sif
 ```
-This will open a temporary sandbox, that you can ```exit``` at anytime.
+This will open a temporary sandbox, that you can ```exit``` at anytime. If bound correctly, it is possible to naviguate through the existing directories.
 If needed, it is possible to run several instances of the image at the same time, see [here](https://docs.sylabs.io/guides/3.0/user-guide/running_services.html).
 
 
@@ -98,13 +98,14 @@ vg construct -r data/reference.fa -v data/your-vcf-file1.vcf.gz -v data/your-vcf
 
 
 # Creating Subsets for the target population
+
 The goal now is to filter the VCF files by keeping the individuals from the target population only. This can be done with bcftools, a SAMtools project.
 
 There are 2 criterion to make these subsets : the population and the Minor Allele Frequency (MAF). 
-The targets are Mozambite individuals and MAF > 0.01%.
+The targets are Mozabite individuals and MAF > 0.01%.
 
 First, let's try it out on a single vcf file, here chromosome 21.
-Here is the command line to exclusively keep the target population and MAF and put it in a new and compressed vcf file :
+Here is the command line to exclusively keep the target population, called by their IDs (e.g. HGDP01275) and MAF and put it in a new and compressed vcf file :
 ```sh
 cd data
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' hgdp_21.vcf.gz > bgzip > sub21.vcf.gz
@@ -129,6 +130,8 @@ Seeing the queue : ```squeue```
 
 Seeing details of the job using its ID : ```scontrol show job jobID```
 
+Seeing how resource efficient the job is : ```seffx jobID.batch```
+
 Deleting the job using its ID : ```scancel jobID```
 
 Seeing the differennt partitions : ```sinfo```
@@ -146,8 +149,8 @@ Access the HPC using PuTTY to have an SSH connection (note : this part was done 
 
 Let's start with writting a complete .sh file that the HPC will be able to run.
 
-Open a note pad, e.g. ```micro```.
-In the notepad, specify the resources needed for the job (i.e. job name, wall time, nodes, number of tasks, cpu, RAM, etc).
+Open a note pad, e.g. ```nano```.
+In the notepad, specify the resources needed for the job (i.e. job name, wall time, nodes, number of tasks, cpu, RAM, etc). Note : optional.
 
 Let's do a dummy script called ```helloworld_script.sh``` to test that, without specified resources :
 ```sh
@@ -158,11 +161,10 @@ echo "Hello, world!"
 And run it : 
 ```sh
  sbatch -A OD-221017 helloworld_script.sh
- # the -A is not always needed, in this case and witht his HPC it was required to specify a project ID
+ # the HPC required to specify a project ID
  # to check the status of the jobs 
  squeue -u username
  # to see the output
- ls
  less slurm-jobID.out
 ```
 
@@ -174,7 +176,6 @@ cat > my-2nd-script.sh <<EOF
 echo "Hello, world!"
 EOF
 
-chmod +x my-2nd-script.sh
 ./my-2nd-script.sh
 ```
 
@@ -184,21 +185,23 @@ And run it :
  # to check the status of the jobs 
  squeue -u username
  # to see the output
- ls
  less slurm-jobID.out
 ``` 
 
-Before going to the next section, let's check if the singularity module is installed on the HPC :
+Before going to the next section, check if the singularity module is installed on the HPC :
 ```sh
  module avail
 ```
 
 # Accessing CSIRO's HPC -- data manager 
 The documentation about accessing the data manager to download files with a large amount of data can be found [here](https://confluence.csiro.au/display/SC/CSIRO+SC+Shared+Cluster+-+Petrichor).
-IIt is important to make sure the data is stored in the right place so i dooesn't get 'flushed' (i.e. deleted)
-Access the petrichor-dm interactive session using this command : ```sinteractive -p io -A JOBID  -t 2:00:00```
+It is important to make sure the data is stored in the right place so i dooesn't get 'flushed' (i.e. deleted).
+Preferably, access the petrichor h4 petrichor-login-h4.hpc.csiro.au  (giving access to 4TB nodes) with PuTTY or an ssh session on a linux terminal.
+Otherwise, access the petrichor-dm interactive session using this command : ```sinteractive -p io -A JOBID  -t 2:00:00```
 Access the user's datastore directory using : ```cd /datastore/username```
 
+
+If possible, transfer your files on the HPC. Otherwise, download the image and the files again (cf. next step).
 Note : When building the image in Singularity with ```singularity inspect image.sif```, checking the image returns the following :
 ```sh
 org.label-schema.build-arch: amd64
@@ -212,13 +215,13 @@ org.label-schema.usage.singularity.version: 3.7.3
 # Creating a Pangenome on the HPC
 
 File system convention :
-- the files containing the data are stored in /datastore/user/data
-- the job scripts are created and ran in /scratch3/user
+- the files containing the data are stored in ```/datastore/username/data```
+- the job scripts are created and ran in ```/scratch3/username```
 
-It can be useful to use 2 jobscripts, since all the vcfs need to run in the same singularity container. It is possible to write a script that will write another script containing the commands needed to run vg in singularity. Otherwise, a simple loop can do the trick. See both ways [here](https://github.com/RachelFoare/Pangenome-construction-using-VG/blob/main/Running%20the%20pangenome%20on%20the%20HPC)
+It can be useful to use 2 jobscripts, since all the vcfs need to run in the same singularity container. It is possible to write a script that will write another script containing the commands needed to run vg in singularity. Otherwise, a simple loop can do the trick. 
 Let's download all the VCF files, the reference file and the container image in a new directory called ```data``` :
 
-Note : All the data has actually been retrieved with a batch job, using the ```wget``` commands in a shell script, so that the downloads could run effectively.  
+Note : All the data has actually been retrieved using a batch job, using the ```wget``` commands in a shell script, so that the downloads could run effectively and in parallel.  
 
 ```sh
 cd /datastore/username
@@ -256,6 +259,7 @@ wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.
 wget ftp://ngs.sanger.ac.uk/production/hgdp/hgdp_wgs.20190516/hgdp_wgs.20190516.full.chr22.vcf
 ```
 
+Create the subsets.
 It is possible to do the subsets with each VCF file in a loop :
 ```sh
 subset() {
@@ -270,9 +274,10 @@ It can also be done by simply changing the name of the file as follows :
 ```sh
 module load bcftools
 bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr1.vcf.gz > bgzip > sub-chr1.vcf.gz
+bcftools view --force-samples -s HGDP01275,HGDP01282,HGDP01256,HGDP01263,HGDP01268,HGDP01270,HGDP01276,HGDP01257,HGDP01264,HGDP01272,HGDP01277,HGDP01258,HGDP01260,HGDP01265,HGDP01254,HGDP01259,HGDP01261,HGDP01266,HGDP01273,HGDP01280,HGDP01255,HGDP01262,HGDP01267,HGDP01279,HGDP01274  -i 'MAF > 0.01' chr2.vcf.gz > bgzip > sub-chr2.vcf.gz
 ```
 
-It is possible that the HPC does not have the required tools such as bgzip or tabix to index the files in their module (look for  ```htslib```), so make sure it is, otherwise install conda, then pbgzip and tabix from bioconda
+It is possible that the HPC does not have the required tools such as bgzip or tabix to index the files in their module (look for  ```htslib```), so make sure it is, otherwise install conda, then pbgzip and tabix from bioconda. If ```htslib``` is available, simply load the module and use ```bgzip```.
 ```sh
  wget https://repo.anaconda.com/miniconda/Miniconda3-py38_23.3.1-0-Linux-x86_64.sh
  conda create -n environment
@@ -290,14 +295,14 @@ Then use the ```pbgzip``` command and the ```tabix``` command to index all the v
  pbgzip sub-chr21.vcf
  tabix -p vcf sub-chr21.vcf.gz
  
- # if you have trouble using samtools faidx, try zipping the ref.fa file with pbgzip and the unzip it and try again
+ # if you have trouble using samtools faidx, try zipping the ref.fa file with pbgzip and then unzip it and try again
  pbgzip ref.fa
  gunzip ref.fa.gz
  samtools faidx ref.fa
 ```
 
 And now with our actual commands to create the graph :
-NB : these commands are in a script called ```pangenome_script.sh``` and for chromosome 21 specifically.
+Note : these commands are in a script called ```pangenome_script.sh``` and for chromosome 21 specifically to test it.
 ```sh
 #!/bin/bash
 #SBATCH --time=8:00:00
@@ -310,17 +315,22 @@ module load singularity
 
 singularity exec --bind /datastore/user/data:/datastore/user/data image.sif vg construct -r /datastore/user/data/ref.fa -v /datastore/user/data/sub-chr21.vcf.gz >/datastore/user/data/p21.vg
 ```
-The nodes need to be coordinated like so :
+Create all the graphs using this command, either in a loop or by repeating the singularity command in the script like so :
+```sh
+singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg construct -r /datastore/foa003/data/ref.fa -v /datastore/foa003/data/sub-chr9.vcf.gz >/datastore/foa003/data/p9.vg
+singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg construct -r /datastore/foa003/data/ref.fa -v /datastore/foa003/data/sub-chr8.vcf.gz >/datastore/foa003/data/p8.vg
+singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg construct -r /datastore/foa003/data/ref.fa -v /datastore/foa003/data/sub-chr7.vcf.gz >/datastore/foa003/data/p7.vg
+```
+Then the nodes need to be coordinated :
 
 ```sh
 module load singularity
-
 singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg ids -j $(for i in $(seq 1 22); do echo p$i.vg; done)
 ```
 
 And then indexed as ```wgx.xg``` **and** ```wg.gcsa``` files. 
 
-The following lines index the pangenomes as ```wgx.xg```. Note that this batch was run with 1TB of RAM, but at least 1.5TB is ideal.
+The following lines index the pangenomes as ```wgx.xg```. Note that this batch was run with 1TB of RAM, but 1.5TB is ideal. It can take several hours.
 ```sh
 #!/bin/bash
 #SBATCH --time=8:00:00
@@ -330,6 +340,8 @@ The following lines index the pangenomes as ```wgx.xg```. Note that this batch w
 cd /datastore/user
 module load singularity
 
-singularity exec --bind /datastore/foa003/data:/datastore/user/data image.sif vg index -x /datastore/user/data/wgx.xg $(for i in $(seq 1 22); do echo data/p$i.vg; done)
+
+singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg index -x /datastore/foa003/data/wgx.xg  /datastore/foa003/data/p1.vg /datastore/foa003/data/p2.vg /datastore/foa003/data/p3.vg /datastore/foa003/data/p4.vg /datastore/foa003/data/p5.vg /datastore/foa003/data/p6.vg /datastore/foa003/data/p7.vg /datastore/foa003/data/p8.vg /datastore/foa003/data/p9.vg /datastore/foa003/data/p10.vg /datastore/foa003/data/p11.vg /datastore/foa003/data/p12.vg /datastore/foa003/data/p13.vg /datastore/foa003/data/p14.vg /datastore/foa003/data/p15.vg /datastore/foa003/data/p16.vg /datastore/foa003/data/p17.vg /datastore/foa003/data/p18.vg /datastore/foa003/data/p19.vg /datastore/foa003/data/p20.vg /datastore/foa003/data/p21.vg /datastore/foa003/data/p22.vg
 ```
+
 Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to mask out complex regions.
