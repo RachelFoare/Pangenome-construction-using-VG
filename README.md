@@ -345,6 +345,8 @@ singularity exec --bind /datastore/username/data:/datastore/username/data image.
 ```
 
 Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to mask out highly complex regions.
+
+
 (work in progress)
 
 
@@ -355,7 +357,7 @@ Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to ma
 In order to properly assess the performance of the graph, it is essential to examine criteria reflecting the quality of the alignment of the graph with the reads of an external group remaining genetically close, and compare it with the same alignment with the original linear reference used to build the pangenome. 
 These criteria can be found and measured using vg, the ```Picard``` module and SAMtools.
 The stats will be calculated by the results of the alignment of Bedouin reads to the graph, and an alignment of the same individuals on the linear reference.
-The linear alignments can be found [here](https://www.internationalgenome.org/data-portal/sample), with the specified population (Bedouin, not Bedouin B).
+The linear alignments can be found [here](https://www.internationalgenome.org/data-portal/sample), with the specified population (Bedouin for HGDP or Bedouin B for SGDP).
 However in this case it was decided to redo the alignments in order to keep track of the methodology using ```bowtie 2.5.1``` AND ```bwa 0.7.17-r1188``` using the FASTA files of the reads.
 Due to lack of time and storage, 5 sequences of Bedouin people from HGDP and 2 from SGDP are used for the alignments. The 5 samples from HGDP were picked randomly. 
 Let's start by downloading the FASTA file for this individual (HGDP00616), and indexing the reference file :
@@ -368,14 +370,17 @@ bwa index ref.fa
 ```
 The samples used for the following statistics are the following :
 from SGDP
+```sh
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR141/001/ERR1419141/ERR1419141_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR141/002/ERR1419132/ERR1419132_2.fastq.gz
-
+```
 from HGDP
+```sh
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR145/005/ERR1451355/ERR1451355_2.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR145/000/ERR1451680/ERR1451680_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR145/001/ERR1451031/ERR1451031_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR145/009/ERR1451329/ERR1451329_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR144/000/ERR1443460/ERR1443460_2.fastq.gz
+```
 
 
