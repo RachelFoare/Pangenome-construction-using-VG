@@ -344,4 +344,4 @@ module load singularity
 singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg index -x /datastore/foa003/data/wgx.xg  /datastore/foa003/data/p1.vg /datastore/foa003/data/p2.vg /datastore/foa003/data/p3.vg /datastore/foa003/data/p4.vg /datastore/foa003/data/p5.vg /datastore/foa003/data/p6.vg /datastore/foa003/data/p7.vg /datastore/foa003/data/p8.vg /datastore/foa003/data/p9.vg /datastore/foa003/data/p10.vg /datastore/foa003/data/p11.vg /datastore/foa003/data/p12.vg /datastore/foa003/data/p13.vg /datastore/foa003/data/p14.vg /datastore/foa003/data/p15.vg /datastore/foa003/data/p16.vg /datastore/foa003/data/p17.vg /datastore/foa003/data/p18.vg /datastore/foa003/data/p19.vg /datastore/foa003/data/p20.vg /datastore/foa003/data/p21.vg /datastore/foa003/data/p22.vg
 ```
 
-Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to mask out complex regions.
+Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to mask out highly complex regions.
