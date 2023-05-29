@@ -365,6 +365,7 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR141/002/ERR1419132/ERR1419132_2.fastq
 module load bowtie
 bowtie2-build reference.fasta reference_index
 ```
-
+The samples used for the following statistics are registered in the following table.
+![AltText](https://drive.google.com/file/d/1B6OVi4_91yNHxrJFCx31wrV8L2CpGlaQ/view?usp=drive_link "List of the individuals used in the alignments")
 
 
