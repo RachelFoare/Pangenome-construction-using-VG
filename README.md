@@ -366,6 +366,6 @@ module load bowtie
 bowtie2-build reference.fasta reference_index
 ```
 The samples used for the following statistics are registered in the following table.
-![AltText](https://imgur.com/a/t196FWp "List of the individuals used in the alignments")
+![AltText](https://imgur.com/9ATBOl4 "List of the individuals used in the alignments")
 
 
