@@ -310,22 +310,22 @@ Note : these commands are in a script called ```pangenome_script.sh``` and for c
 #SBATCH --mem=256G
 
 
-cd /datastore/foa003
+cd /datastore/username
 module load singularity
 
 singularity exec --bind /datastore/user/data:/datastore/user/data image.sif vg construct -r /datastore/user/data/ref.fa -v /datastore/user/data/sub-chr21.vcf.gz >/datastore/user/data/p21.vg
 ```
 Create all the graphs using this command, either in a loop or by repeating the singularity command in the script like so :
 ```sh
-singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg construct -r /datastore/foa003/data/ref.fa -v /datastore/foa003/data/sub-chr9.vcf.gz >/datastore/foa003/data/p9.vg
-singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg construct -r /datastore/foa003/data/ref.fa -v /datastore/foa003/data/sub-chr8.vcf.gz >/datastore/foa003/data/p8.vg
-singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg construct -r /datastore/foa003/data/ref.fa -v /datastore/foa003/data/sub-chr7.vcf.gz >/datastore/foa003/data/p7.vg
+singularity exec --bind /datastore/username/data:/datastore/username/data image.sif vg construct -r /datastore/username/data/ref.fa -v /datastore/username/data/sub-chr9.vcf.gz >/datastore/username/data/p9.vg
+singularity exec --bind /datastore/username/data:/datastore/username/data image.sif vg construct -r /datastore/username/data/ref.fa -v /datastore/username/data/sub-chr8.vcf.gz >/datastore/username/data/p8.vg
+singularity exec --bind /datastore/username/data:/datastore/username/data image.sif vg construct -r /datastore/username/data/ref.fa -v /datastore/username/data/sub-chr7.vcf.gz >/datastore/username/data/p7.vg
 ```
 Then the nodes need to be coordinated :
 
 ```sh
 module load singularity
-singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg ids -j $(for i in $(seq 1 22); do echo p$i.vg; done)
+singularity exec --bind /datastore/username/data:/datastore/username/data image.sif vg ids -j $(for i in $(seq 1 22); do echo p$i.vg; done)
 ```
 
 And then indexed as ```wgx.xg``` **and** ```wg.gcsa``` files. 
@@ -341,7 +341,8 @@ cd /datastore/user
 module load singularity
 
 
-singularity exec --bind /datastore/foa003/data:/datastore/foa003/data image.sif vg index -x /datastore/foa003/data/wgx.xg  /datastore/foa003/data/p1.vg /datastore/foa003/data/p2.vg /datastore/foa003/data/p3.vg /datastore/foa003/data/p4.vg /datastore/foa003/data/p5.vg /datastore/foa003/data/p6.vg /datastore/foa003/data/p7.vg /datastore/foa003/data/p8.vg /datastore/foa003/data/p9.vg /datastore/foa003/data/p10.vg /datastore/foa003/data/p11.vg /datastore/foa003/data/p12.vg /datastore/foa003/data/p13.vg /datastore/foa003/data/p14.vg /datastore/foa003/data/p15.vg /datastore/foa003/data/p16.vg /datastore/foa003/data/p17.vg /datastore/foa003/data/p18.vg /datastore/foa003/data/p19.vg /datastore/foa003/data/p20.vg /datastore/foa003/data/p21.vg /datastore/foa003/data/p22.vg
+singularity exec --bind /datastore/username/data:/datastore/username/data image.sif vg index -x /datastore/username/data/wgx.xg  /datastore/username/data/p1.vg /datastore/username/data/p2.vg /datastore/username/data/p3.vg /datastore/username/data/p4.vg /datastore/username/data/p5.vg /datastore/username/data/p6.vg /datastore/username/data/p7.vg /datastore/username/data/p8.vg /datastore/username/data/p9.vg /datastore/username/data/p10.vg /datastore/username/data/p11.vg /datastore/username/data/p12.vg /datastore/username/data/p13.vg /datastore/username/data/p14.vg /datastore/username/data/p15.vg /datastore/username/data/p16.vg /datastore/username/data/p17.vg /datastore/username/data/p18.vg /datastore/username/data/p19.vg /datastore/username/data/p20.vg /datastore/username/data/p21.vg /datastore/username/data/p22.vg
 ```
 
 Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to mask out highly complex regions.
+(work in progress)
