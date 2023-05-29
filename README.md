@@ -356,7 +356,7 @@ In order to properly assess the performance of the graph, it is essential to exa
 These criteria can be found and measured using vg, the ```Picard``` module and SAMtools.
 The stats will be calculated by the results of the alignment of Bedouin reads to the graph, and an alignment of the same individuals on the linear reference.
 The linear alignments can be found [here](https://www.internationalgenome.org/data-portal/sample), with the specified population (Bedouin, not Bedouin B).
-However in this case it was decided to redo the alignments in order to keep track of the methodology. 
+However in this case it was decided to redo the alignments in order to keep track of the methodology using ```bowtie 2.5.1``` 
 
 
 
