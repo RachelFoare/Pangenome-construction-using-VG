@@ -383,4 +383,8 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR145/009/ERR1451329/ERR1451329_1.fastq.gz
 ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR144/000/ERR1443460/ERR1443460_2.fastq.gz
 ```
 
-
+ The sequences will be aligned using both bwa and bowtie, depending on their database of origin. The resulting alignments sould be :
+ - bowtie alignment with the 5 HGDP samples
+ - bwa alignment with the 5 HGDP samples
+ - bowtie alignment with the 2 SGDP samples
+ - bwa alignment with the 2 SGDP samples
