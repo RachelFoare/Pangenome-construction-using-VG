@@ -366,6 +366,7 @@ Let's start by downloading the FASTA file for this individual (HGDP00616), and i
 wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR141/002/ERR1419132/ERR1419132_2.fastq.gz
 module load bowtie
 bowtie2-build ref.fa ref-index
+module load bwa
 bwa index ref.fa 
 ```
 The samples used for the following statistics are the following :
