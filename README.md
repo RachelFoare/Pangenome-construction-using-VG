@@ -372,5 +372,3 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR144/000/ERR1443460/ERR1443460_2.fastq.gz
  - bwa alignment with the 5 HGDP samples
  - bowtie alignment with the 2 SGDP samples, built with ```bowtie2 -q -x ref-index -U B6.fastq.gz,B7.fastq.gz -S bow-alig7.sam```
  - bwa alignment with the 2 SGDP samples
- - bowtie alignment with all 7 samples ```bowtie2 -q -x ref-index -U B1.fastq.gz,B2.fastq.gz,B3.fastq.gz,B4.fastq.gz,B5.fastq.gz,B6.fastq.gz,B7.fastq.gz -S bow-alig-comp.sam```
- - bwa alignment with all 7 samples
