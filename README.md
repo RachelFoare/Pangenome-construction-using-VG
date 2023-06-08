@@ -168,33 +168,13 @@ And run it :
  less slurm-jobID.out
 ```
 
-Now let's write a script called ```helloworld-advanced_script.sh```that will create and execute another script :
-```sh
-#!/bin/bash
-cat > my-2nd-script.sh <<EOF
-#!/bin/bash
-echo "Hello, world!"
-EOF
-
-./my-2nd-script.sh
-```
-
-And run it :
-```sh
- sbatch -A OD-221017 echo.sh helloworld-advanced_script.sh
- # to check the status of the jobs 
- squeue -u username
- # to see the output
- less slurm-jobID.out
-``` 
-
 Before going to the next section, check if the singularity module is installed on the HPC :
 ```sh
  module avail
 ```
 
 # Accessing CSIRO's HPC -- data manager 
-The documentation about accessing the data manager to download files with a large amount of data can be found [here](https://confluence.csiro.au/display/SC/CSIRO+SC+Shared+Cluster+-+Petrichor).
+The documentation about accessing the data manager to download files with a large amount of data, for CSIRO's HPC can be found [here](https://confluence.csiro.au/display/SC/CSIRO+SC+Shared+Cluster+-+Petrichor).
 It is important to make sure the data is stored in the right place so i dooesn't get 'flushed' (i.e. deleted).
 Preferably, access the petrichor h4 petrichor-login-h4.hpc.csiro.au  (giving access to 4TB nodes) with PuTTY or an ssh session on a linux terminal.
 Otherwise, access the petrichor-dm interactive session using this command : ```sinteractive -p io -A JOBID  -t 2:00:00```
