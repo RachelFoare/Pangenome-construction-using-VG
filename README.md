@@ -368,7 +368,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR144/000/ERR1443460/ERR1443460_2.fastq.gz
 ```
 
  The sequences will be aligned using both bwa and bowtie, depending on their database of origin. The resulting alignments sould be :
- - bowtie alignment with the 5 HGDP samples, built with ```bowtie2 -q -x ref-index -U B1.fastq.gz,B2.fastq.gz,B3.fastq.gz,B4.fastq.gz,B5.fastq.gz -S bow-alig5.sam```
- - bwa alignment with the 5 HGDP samples
- - bowtie alignment with the 2 SGDP samples, built with ```bowtie2 -q -x ref-index -U B6.fastq.gz,B7.fastq.gz -S bow-alig7.sam```
- - bwa alignment with the 2 SGDP samples
+ - bowtie alignment with the 5 HGDP samples, built with ```bowtie2 -q -x ref-index -U B1.fastq.gz,B2.fastq.gz,B3.fastq.gz,B4.fastq.gz,B5.fastq.gz -S output-bow-5.sam```
+ - bwa alignment with the 5 HGDP samples ```bwa mem ref.fa <(cat B1.fastq.gz B2.fastq.gz B3.fastq.gz B4.fastq.gz B5.fastq.gz) > output-bwa-5.sam```
+ - bowtie alignment with the 2 SGDP samples, built with ```bowtie2 -q -x ref-index -U B6.fastq.gz,B7.fastq.gz -S output-bow-7.sam```
+ - bwa alignment with the 2 SGDP samples ```bwa mem ref.fa <(cat B6.fastq.gz B7.fastq.gz) > output-bwa-7.sam```
