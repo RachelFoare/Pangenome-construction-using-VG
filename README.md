@@ -1,4 +1,4 @@
-# Pangenome-construction-using-VG 
+# Pangenome-construction-using-VG  
 Steps to the creation of a pangenome in VG using Singularity -- CSIRO INTERNSHIP 2023
 
 The goal is to understand how singularity and vg work, in order to build a Pangenome.
