@@ -329,7 +329,14 @@ singularity exec --bind /datastore/user/data:/datastore/foa003/data image.sif vg
 
 Before indexing as ```wg.gcsa``` it is necessary to prune the graphs, i.e. to mask out highly complex regions.
 
+```sh
+#SBATCH --array=1-22
 
+export APPTAINER_CACHEDIR=/scratch3/user/singularity_cache
+export S_IMG=/scratch3/user/image.sif
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
+singularity exec ${S_IMG} vg prune -t ${SLURM_CPUS_PER_TASK} -k 45 -r /scratch3/user/data/p${SLURM_ARRAY_TASK_ID}.vg > /scratch3/user/data/pr${SLURM_ARRAY_TASK_ID}.vg
+```
 (work in progress)
 
 
