@@ -337,10 +337,11 @@ export S_IMG=/scratch3/user/image.sif
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 singularity exec ${S_IMG} vg prune -t ${SLURM_CPUS_PER_TASK} -k 45 -r /scratch3/user/data/p${SLURM_ARRAY_TASK_ID}.vg > /scratch3/user/data/pr${SLURM_ARRAY_TASK_ID}.vg
 ```
-(work in progress)
 
-
-
+To run the following job properly, make sure to add ```-z 20480``` to the sbatch command 
+```sh
+singularity exec ${S_IMG} vg index -t ${SLURM_CPUS_PER_TASK} --temp-dir /scratch3/foa003/temp -g /scratch3/foa003/wg.gcsa /scratch3/foa003/data/pr{1..22}.vg -p -Z 20480
+```
 
 # Assessing the Pangenome - Statistics for the internship report
 
