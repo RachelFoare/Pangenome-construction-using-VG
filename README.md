@@ -338,7 +338,7 @@ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
 singularity exec ${S_IMG} vg prune -t ${SLURM_CPUS_PER_TASK} -k 45 -r /scratch3/user/data/p${SLURM_ARRAY_TASK_ID}.vg > /scratch3/user/data/pr${SLURM_ARRAY_TASK_ID}.vg
 ```
 
-To run the following job properly, make sure to add ```-z 20480``` to the sbatch command 
+To run the following job properly, make sure to add ```-z 20480``` to the sbatch command, and make sure the temp storage is higher than 20TB. 
 ```sh
 singularity exec ${S_IMG} vg index -t ${SLURM_CPUS_PER_TASK} --temp-dir /scratch3/foa003/temp -g /scratch3/foa003/wg.gcsa /scratch3/foa003/data/pr{1..22}.vg -p -Z 20480
 ```
@@ -380,3 +380,9 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR144/000/ERR1443460/ERR1443460_2.fastq.gz
  - bwa alignment with the 5 HGDP samples ```bwa mem ref.fa <(cat B1.fastq.gz B2.fastq.gz B3.fastq.gz B4.fastq.gz B5.fastq.gz) > output-bwa-5.sam```
  - bowtie alignment with the 2 SGDP samples, built with ```bowtie2 -q -x ref-index -U B6.fastq.gz,B7.fastq.gz -S output-bow-7.sam```
  - bwa alignment with the 2 SGDP samples ```bwa mem ref.fa <(cat B6.fastq.gz B7.fastq.gz) > output-bwa-7.sam```
+
+These alignments are assessed using ```vg stats``` and ```picard CollectAlignmentSummaryMetrics``` in order to have information about indels, MQ0, mismatches and soft clipping. 
+```sh
+samtools stat out7.sam > statbwa7.txt
+picard CollectAlignmentSummaryMetrics -I out7.sam -O picbwa7.txt
+```
