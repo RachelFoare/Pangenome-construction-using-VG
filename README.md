@@ -339,6 +339,8 @@ singularity exec ${S_IMG} vg prune -t ${SLURM_CPUS_PER_TASK} -k 45 -r /scratch3/
 ```
 
 To run the following job properly, make sure to add ```-z 20480``` to the sbatch command, and make sure the temp storage is higher than 20TB. 
+
+Note that constructing this index takes 7 days to construct.
 ```sh
 singularity exec ${S_IMG} vg index -t ${SLURM_CPUS_PER_TASK} --temp-dir /scratch3/foa003/temp -g /scratch3/foa003/wg.gcsa /scratch3/foa003/data/pr{1..22}.vg -p -Z 20480
 ```
